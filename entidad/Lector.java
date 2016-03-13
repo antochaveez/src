@@ -32,6 +32,20 @@ public class Lector implements Serializable {
 			super();
 			// TODO Auto-generated constructor stub
 		}
+		
+		
+
+		public Lector(Integer lecCodigo, String lecNombre, Integer lecCedula,
+				String lecDireccion, String lecTelefo) {
+			super();
+			this.lecCodigo = lecCodigo;
+			this.lecNombre = lecNombre;
+			this.lecCedula = lecCedula;
+			this.lecDireccion = lecDireccion;
+			this.lecTelefo = lecTelefo;
+		}
+
+
 
 		public Integer getLecCodigo() {
 			return lecCodigo;
