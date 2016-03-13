@@ -29,6 +29,17 @@ private static final long serialVersionUID = 1L;
 			super();
 			// TODO Auto-generated constructor stub
 		}
+		
+		
+		public Config(String cfgOrga, Integer cfgDeumor, Integer cfgDiamor,
+				Integer cfgDiapre) {
+			super();
+			this.cfgOrga = cfgOrga;
+			this.cfgDeumor = cfgDeumor;
+			this.cfgDiamor = cfgDiamor;
+			this.cfgDiapre = cfgDiapre;
+		}
+
 
 		public String getCfgOrga() {
 			return cfgOrga;
