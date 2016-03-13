@@ -4,7 +4,7 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
       <property name="hibernate.connection.username" value="postgres"/>      
-      <property name="hibernate.connection.password" value="12345"/>
+      <property name="hibernate.connection.password" value="admin"/>
       <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>      
       <property name="hibernate.connection.url" value="jdbc:postgresql:biblioteca"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
