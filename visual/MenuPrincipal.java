@@ -17,6 +17,13 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Window.Type;
+import java.awt.Rectangle;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import java.awt.Cursor;
+import javax.swing.UIManager;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class MenuPrincipal extends JFrame {
 
@@ -57,10 +64,10 @@ public class MenuPrincipal extends JFrame {
 	public MenuPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagen/libros1.png")));
 		setTitle("BIBLIOTECA");
-		setType(Type.UTILITY);
+		setType(Type.POPUP);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 768);
-		contentPane = new Fondito("/imagen/images.jpg");
+		contentPane = new Fondito("/imagen/fondo.jpg");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -89,7 +96,7 @@ public class MenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				AbmEditor abmEditor = new AbmEditor();
-				abmEditor.setSize(800, 600);
+				abmEditor.setSize(900, 600);
 				abmEditor.setResizable(false);
 				abmEditor.setLocationRelativeTo(null);
 				//abmEditor.setAlwaysOnTop(true);
@@ -125,39 +132,44 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmConfiguraciones = new JMenuItem("Configuraciones");
 		mnUtilidades.add(mntmConfiguraciones);
 		
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBorderPainted(false);
-		toolBar.setOpaque(false);
-		toolBar.setBounds(0, 25, 1350, 60);
-		contentPane.add(toolBar);
+		JButton bPrestamo = new JButton("Pr\u00E9stamo");
+		bPrestamo.setForeground(Color.BLACK);
+		bPrestamo.setBorderPainted(false);
+		bPrestamo.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		bPrestamo.setBorder(new EmptyBorder(0, 0, 0, 0));
+		bPrestamo.setVerticalTextPosition(SwingConstants.BOTTOM);
+		bPrestamo.setHorizontalTextPosition(SwingConstants.CENTER);
+		bPrestamo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-319-more-items.png")));
+		bPrestamo.setBounds(0, 25, 125, 71);
+		contentPane.add(bPrestamo);
 		
-		JButton button = new JButton("Pr\u00E9stamo");
-		toolBar.add(button);
-		button.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-319-more-items.png")));
-		button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		button.setHorizontalTextPosition(SwingConstants.CENTER);
+		JButton bLibros = new JButton("Libros");
+		bLibros.setBorderPainted(false);
+		bLibros.setHorizontalTextPosition(SwingConstants.CENTER);
+		bLibros.setVerticalTextPosition(SwingConstants.BOTTOM);
+		bLibros.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-72-book.png")));
+		bLibros.setBounds(0, 94, 125, 71);
+		contentPane.add(bLibros);
 		
-		JButton button_2 = new JButton("Lector");
-		button_2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-527-user-conversation.png")));
-		button_2.setVerticalTextPosition(SwingConstants.BOTTOM);
-		button_2.setHorizontalTextPosition(SwingConstants.CENTER);
-		toolBar.add(button_2);
+		JButton bLector = new JButton("Lector");
+		bLector.setBorderPainted(false);
+		bLector.setVerticalTextPosition(SwingConstants.BOTTOM);
+		bLector.setHorizontalTextPosition(SwingConstants.CENTER);
+		bLector.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-527-user-conversation.png")));
+		bLector.setBounds(0, 164, 125, 71);
+		contentPane.add(bLector);
 		
-		JButton button_1 = new JButton("Libros");
-		button_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-72-book.png")));
-		button_1.setVerticalTextPosition(SwingConstants.BOTTOM);
-		button_1.setHorizontalTextPosition(SwingConstants.CENTER);
-		toolBar.add(button_1);
-		
-		JButton button_3 = new JButton("Salir");
-		button_3.addActionListener(new ActionListener() {
+		JButton bSalir = new JButton("Salir");
+		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
-		button_3.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-389-exit.png")));
-		button_3.setVerticalTextPosition(SwingConstants.BOTTOM);
-		button_3.setHorizontalTextPosition(SwingConstants.CENTER);
-		toolBar.add(button_3);
+		bSalir.setBorderPainted(false);
+		bSalir.setHorizontalTextPosition(SwingConstants.CENTER);
+		bSalir.setVerticalTextPosition(SwingConstants.BOTTOM);
+		bSalir.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-389-exit.png")));
+		bSalir.setBounds(0, 234, 125, 71);
+		contentPane.add(bSalir);
 	}
 }

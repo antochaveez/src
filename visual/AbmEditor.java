@@ -27,6 +27,9 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
+import java.awt.Window.Type;
+import java.awt.Panel;
+import javax.swing.JTextArea;
 
 public class AbmEditor extends JFrame {
 
@@ -61,6 +64,7 @@ public class AbmEditor extends JFrame {
 				try {
 					AbmEditor frame = new AbmEditor();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -72,9 +76,10 @@ public class AbmEditor extends JFrame {
 	 * Create the frame.
 	 */
 	public AbmEditor() {
+		setTitle("Registrar Editorial");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AbmEditor.class.getResource("/imagen/libros1.png")));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 900, 600);
 		contentPane = new Fondito("/imagen/images.jpg");
 		contentPane.setBorder(new  EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -141,7 +146,7 @@ public class AbmEditor extends JFrame {
 				dispose();
 			}
 		});
-		bSalir.setBounds(672, 464, 91, 43);
+		bSalir.setBounds(771, 454, 91, 43);
 		contentPane.add(bSalir);
 
 		tCodigo = new JTextField();
@@ -158,13 +163,13 @@ public class AbmEditor extends JFrame {
 
 		tDescri = new JTextField();
 		tDescri.setEditable(false);
-		tDescri.setBounds(639, 201, 124, 23);
+		tDescri.setBounds(639, 201, 223, 23);
 		contentPane.add(tDescri);
 		tDescri.setColumns(10);
 
 		tObse = new JTextField();
 		tObse.setEditable(false);
-		tObse.setBounds(639, 256, 124, 23);
+		tObse.setBounds(639, 256, 223, 23);
 		contentPane.add(tObse);
 		tObse.setColumns(10);
 
@@ -348,7 +353,7 @@ public class AbmEditor extends JFrame {
 			}
 		});
 		bCancelar.setEnabled(false);
-		bCancelar.setBounds(672, 376, 91, 43);
+		bCancelar.setBounds(771, 366, 91, 43);
 		contentPane.add(bCancelar);
 
 		bGuardar = new JButton("Guardar");
@@ -444,7 +449,7 @@ public class AbmEditor extends JFrame {
 		});
 		bGuardar.setEnabled(false);
 		
-		bGuardar.setBounds(550, 376, 91, 43);
+		bGuardar.setBounds(649, 366, 91, 43);
 		contentPane.add(bGuardar);
 		mostrarDatos();
 	}
