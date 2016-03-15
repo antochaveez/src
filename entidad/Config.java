@@ -16,6 +16,8 @@ private static final long serialVersionUID = 1L;
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		
+		@Column(name = "cfg_codigo", unique = true)
+		private Integer cfgCodigo;
 		@Column(name = "cfg_orga", length = 100)
 		private String cfgOrga;
 		@Column(name = "cfg_deumor")
@@ -78,6 +80,16 @@ private static final long serialVersionUID = 1L;
 			return "Config [cfgOrga=" + cfgOrga + ", cfgDeumor=" + cfgDeumor
 					+ ", cfgDiamor=" + cfgDiamor + ", cfgDiapre=" + cfgDiapre
 					+ "]";
+		}
+
+
+		public Integer getCfgCodigo() {
+			return cfgCodigo;
+		}
+
+
+		public void setCfgCodigo(Integer cfgCodigo) {
+			this.cfgCodigo = cfgCodigo;
 		}
 		
 		

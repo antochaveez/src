@@ -60,8 +60,7 @@ private static final long serialVersionUID = 1L;
 
 		@Override
 		public String toString() {
-			return "Editor [ediNumero=" + ediNumero + ", ediDescri="
-					+ ediDescri + ", ediObse=" + ediObse + "]";
+			return "[" + ediNumero + "]" + ediDescri.trim();
 		}
 		
 		
