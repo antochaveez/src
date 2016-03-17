@@ -55,7 +55,7 @@ public class SessionConfiguracion {
         }
     }
 
-    public static boolean existeConfiguracion() throws Exception{
+    public static boolean existeConfiguracion() {
         EntityManager em = getEntityManager();
         try {
             Query q = em.createNativeQuery(
@@ -94,7 +94,7 @@ public class SessionConfiguracion {
      * @param config
      * @throws Exception
      */
-    public static void cambiarConfiguracion(Config config) throws Exception {
+    public static void cambiarConfiguracion(Config config) throws Exception{
 
         if (existeConfiguracion()){
             Config configExistente = obtenerConfiguracion();
