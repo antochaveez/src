@@ -23,6 +23,9 @@ import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
+
+import entidad.Config;
+
 import javax.swing.border.BevelBorder;
 
 public class MenuPrincipal extends JFrame {
@@ -130,6 +133,15 @@ public class MenuPrincipal extends JFrame {
 		mnUtilidades.add(mntmInicializacionDeDatos);
 		
 		JMenuItem mntmConfiguraciones = new JMenuItem("Configuraciones");
+		mntmConfiguraciones.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+				Configuracion config = new Configuracion();
+				config.setSize(900, 600);
+				config.setResizable(false);
+				config.setLocationRelativeTo(null);
+				config.setVisible(true);
+            }
+        });
 		mnUtilidades.add(mntmConfiguraciones);
 		
 		JButton bPrestamo = new JButton("Pr\u00E9stamo");
