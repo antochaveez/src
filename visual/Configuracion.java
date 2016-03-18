@@ -11,9 +11,13 @@ import entidad.Config;
 import session.SessionConfiguracion;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
 public class Configuracion extends JFrame {
@@ -56,11 +60,11 @@ public class Configuracion extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
+
         lblOrganizacion = new JLabel("Organizacion");
         lblOrganizacion.setBounds(51, 25, 101, 15);
         contentPane.add(lblOrganizacion);
-        
+
         txtOrga = new JTextField();
         txtOrga.setBounds(291, 25, 114, 19);
         contentPane.add(txtOrga);
@@ -69,9 +73,10 @@ public class Configuracion extends JFrame {
         lblDeumor = new JLabel("Monto por mora");
         lblDeumor.setBounds(51, 75, 127, 15);
         contentPane.add(lblDeumor);
-        
+
         txtDeumor = new JTextField();
         txtDeumor.setBounds(291, 75, 114, 19);
+        txtDeumor.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDeumor);
         txtDeumor.setColumns(10);
         
@@ -81,6 +86,8 @@ public class Configuracion extends JFrame {
         
         txtDiamor = new JTextField();
         txtDiamor.setBounds(291, 132, 114, 19);
+
+        txtDiamor.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDiamor);
         txtDiamor.setColumns(10);
         
@@ -90,24 +97,46 @@ public class Configuracion extends JFrame {
         
         txtDiapre = new JTextField();
         txtDiapre.setBounds(291, 199, 114, 19);
+        txtDiapre.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDiapre);
         txtDiapre.setColumns(10);
         
         btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Config config = new Config();
-                config.setCfgOrga(txtOrga.getText());
-                config.setCfgDeumor(Integer.parseInt( txtDeumor.getText() ));
-                config.setCfgDiamor(Integer.parseInt( txtDiamor.getText() ));
-                config.setCfgDiapre(Integer.parseInt( txtDiapre.getText() ));
-                // Cerrar la ventana de configuracion despues de guardar los datos
-                dispose();
-                try {
-                    SessionConfiguracion.cambiarConfiguracion(config);
-                } catch (Exception e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                if (txtDeumor.getText().trim().isEmpty() ||
+                    txtDiamor.getText().trim().isEmpty() ||
+                    txtDiapre.getText().trim().isEmpty() ||
+                    txtOrga.getText().trim().isEmpty() ){
+                   JOptionPane.showMessageDialog(null, "Existen campos vacíos, complete antes de guardar"); 
+                   if (txtOrga.getText().trim().isEmpty()){
+                       txtOrga.requestFocus();
+                   } else {
+                       
+                       if (txtDeumor.getText().trim().isEmpty()){
+                           txtDeumor.requestFocus();
+                       } else {
+
+                           if (txtDiamor.getText().trim().isEmpty()){
+                               txtDiamor.requestFocus();
+                           } else {
+
+                               if (txtDiapre.getText().trim().isEmpty()){
+                                   txtDiapre.requestFocus();
+                               } 
+                           }
+
+                       }
+                   }
+
+                } else{
+                    Config config = new Config();
+                    config.setCfgOrga(txtOrga.getText());
+                    config.setCfgDeumor(Integer.parseInt( txtDeumor.getText() ));
+                    config.setCfgDiamor(Integer.parseInt( txtDiamor.getText() ));
+                    config.setCfgDiapre(Integer.parseInt( txtDiapre.getText() ));
+                    // Cerrar la ventana de configuracion despues de guardar los datos
+                    dispose();
                 }
             }
         });
