@@ -27,6 +27,7 @@ import javax.swing.border.SoftBevelBorder;
 import entidad.Config;
 
 import javax.swing.border.BevelBorder;
+import javax.swing.JTextArea;
 
 public class MenuPrincipal extends JFrame {
 
@@ -145,7 +146,7 @@ public class MenuPrincipal extends JFrame {
 		mnUtilidades.add(mntmConfiguraciones);
 		
 		JButton bPrestamo = new JButton("Pr\u00E9stamo");
-		bPrestamo.setForeground(Color.BLACK);
+		bPrestamo.setForeground(Color.LIGHT_GRAY);
 		bPrestamo.setBorderPainted(false);
 		bPrestamo.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		bPrestamo.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -156,6 +157,7 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(bPrestamo);
 		
 		JButton bLibros = new JButton("Libros");
+		bLibros.setForeground(Color.LIGHT_GRAY);
 		bLibros.setBorderPainted(false);
 		bLibros.setHorizontalTextPosition(SwingConstants.CENTER);
 		bLibros.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -164,6 +166,7 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(bLibros);
 		
 		JButton bLector = new JButton("Lector");
+		bLector.setForeground(Color.LIGHT_GRAY);
 		bLector.setBorderPainted(false);
 		bLector.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bLector.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -172,6 +175,7 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(bLector);
 		
 		JButton bSalir = new JButton("Salir");
+		bSalir.setForeground(Color.LIGHT_GRAY);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
