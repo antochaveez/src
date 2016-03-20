@@ -22,6 +22,7 @@ import javax.swing.table.TableColumnModel;
 
 import session.SessionLector;
 import tableModale.LectorTableModel;
+import java.awt.Cursor;
 
 public class AbmLector extends JFrame {
 
@@ -47,7 +48,6 @@ public class AbmLector extends JFrame {
 	private JTextField tCedula;
 	private JTextField tDireccion;
 	private JTextField tTelefono;
-	private JTable table_1;
 	
 
 	/**
@@ -158,6 +158,8 @@ public class AbmLector extends JFrame {
 		tNombre.setColumns(10);
 		
 		tCedula = new JTextField();
+		tCedula.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+		tCedula.getToolTipText();
 		tCedula.setBounds(75, 187, 270, 20);
 		panel.add(tCedula);
 		tCedula.setColumns(10);
@@ -225,9 +227,6 @@ public class AbmLector extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(35, 70, 361, 359);
 		contentPane.add(scrollPane);
-		
-		table_1 = new JTable();
-		scrollPane.setViewportView(table_1);
 
 		table = new JTable();
 		table.setOpaque(false);

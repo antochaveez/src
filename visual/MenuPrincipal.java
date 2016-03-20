@@ -67,11 +67,11 @@ public class MenuPrincipal extends JFrame {
 	 */
 	public MenuPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagen/libros1.png")));
-		setTitle("BIBLIOTECA");
+		setTitle("BIBLIOTECA    V 1.1");
 		setType(Type.POPUP);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 768);
-		contentPane = new Fondito("/imagen/fondo.jpg");
+		contentPane = new Fondito("/imagen/fondo2.jpg");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -137,7 +137,7 @@ public class MenuPrincipal extends JFrame {
 		mntmConfiguraciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 				Configuracion config = new Configuracion();
-				config.setSize(900, 600);
+				config.setSize(450, 350);
 				config.setResizable(false);
 				config.setLocationRelativeTo(null);
 				config.setVisible(true);
@@ -146,8 +146,8 @@ public class MenuPrincipal extends JFrame {
 		mnUtilidades.add(mntmConfiguraciones);
 		
 		JButton bPrestamo = new JButton("Pr\u00E9stamo");
-		bPrestamo.setForeground(Color.LIGHT_GRAY);
-		bPrestamo.setBorderPainted(false);
+		bPrestamo.setBackground(Color.GRAY);
+		bPrestamo.setForeground(Color.BLACK);
 		bPrestamo.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		bPrestamo.setBorder(new EmptyBorder(0, 0, 0, 0));
 		bPrestamo.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -157,8 +157,8 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(bPrestamo);
 		
 		JButton bLibros = new JButton("Libros");
-		bLibros.setForeground(Color.LIGHT_GRAY);
-		bLibros.setBorderPainted(false);
+		bLibros.setBackground(Color.GRAY);
+		bLibros.setForeground(Color.BLACK);
 		bLibros.setHorizontalTextPosition(SwingConstants.CENTER);
 		bLibros.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bLibros.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-72-book.png")));
@@ -166,8 +166,8 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(bLibros);
 		
 		JButton bLector = new JButton("Lector");
-		bLector.setForeground(Color.LIGHT_GRAY);
-		bLector.setBorderPainted(false);
+		bLector.setBackground(Color.GRAY);
+		bLector.setForeground(Color.BLACK);
 		bLector.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bLector.setHorizontalTextPosition(SwingConstants.CENTER);
 		bLector.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-527-user-conversation.png")));
@@ -175,13 +175,13 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(bLector);
 		
 		JButton bSalir = new JButton("Salir");
-		bSalir.setForeground(Color.LIGHT_GRAY);
+		bSalir.setBackground(Color.GRAY);
+		bSalir.setForeground(Color.BLACK);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
-		bSalir.setBorderPainted(false);
 		bSalir.setHorizontalTextPosition(SwingConstants.CENTER);
 		bSalir.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bSalir.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagen/glyphicons-389-exit.png")));
