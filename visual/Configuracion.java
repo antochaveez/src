@@ -15,9 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
 public class Configuracion extends JFrame {
@@ -60,11 +57,11 @@ public class Configuracion extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
+        
         lblOrganizacion = new JLabel("Organizacion");
         lblOrganizacion.setBounds(51, 25, 101, 15);
         contentPane.add(lblOrganizacion);
-
+        
         txtOrga = new JTextField();
         txtOrga.setBounds(291, 25, 114, 19);
         contentPane.add(txtOrga);
@@ -73,7 +70,7 @@ public class Configuracion extends JFrame {
         lblDeumor = new JLabel("Monto por mora");
         lblDeumor.setBounds(51, 75, 127, 15);
         contentPane.add(lblDeumor);
-
+        
         txtDeumor = new JTextField();
         txtDeumor.setBounds(291, 75, 114, 19);
         txtDeumor.addKeyListener(new InputDeNumeros());

@@ -80,7 +80,7 @@ public class AbmEditor extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AbmEditor.class.getResource("/imagen/libros1.png")));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
-		contentPane = new Fondito("/imagen/images.jpg");
+		contentPane = new Fondito("/imagen/fondo2.jpg");
 		contentPane.setBorder(new  EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -150,6 +150,7 @@ public class AbmEditor extends JFrame {
 		contentPane.add(bSalir);
 
 		tCodigo = new JTextField();
+		tCodigo.setDisabledTextColor(Color.BLACK);
 		tCodigo.setOpaque(false);
 		tCodigo.setEnabled(false);
 		tCodigo.setBounds(639, 139, 86, 23);
@@ -166,6 +167,7 @@ public class AbmEditor extends JFrame {
 		tDescri.setBounds(639, 201, 223, 23);
 		contentPane.add(tDescri);
 		tDescri.setColumns(10);
+		
 
 		tObse = new JTextField();
 		tObse.setEditable(false);
@@ -387,12 +389,12 @@ public class AbmEditor extends JFrame {
 					if (bGuardar.getLabel().equals("Eliminar")) {
 						editor.setEdiNumero(Integer.valueOf(tCodigo.getText()));
 						
-						int resp = JOptionPane.showConfirmDialog(bEliminar, "Desea eliminar la editorial?","Confirmacion",JOptionPane.OK_CANCEL_OPTION);
+						int resp = JOptionPane.showConfirmDialog(bEliminar, "Desea eliminar la editorial? "+ "Codigo: "+ editor.getEdiNumero()+ " " + editor.getEdiDescri(),"Confirmacion",JOptionPane.OK_CANCEL_OPTION);
 						
 						if (resp == 0) {
 							try {
 								SessionEditor.eliminar(editor);
-								JOptionPane.showMessageDialog(null, "Editorial ha sido eliminado satisfactoriamente");
+								JOptionPane.showMessageDialog(null, "Editorial ha sido eliminado satisfactoriamente"+ editor.getEdiNumero());
 								
 								
 							} catch (Exception e) {
@@ -444,6 +446,56 @@ public class AbmEditor extends JFrame {
 						mostrarDatos();
 						
 					}
+				}
+			}
+		});
+		
+		
+		bSalir.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					bCancelar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tObse.requestFocus();
+				}
+			}
+		});
+		bCancelar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					bSalir.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					bGuardar.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tObse.requestFocus();
+				}
+
+			}
+		});
+		
+		bGuardar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					bCancelar.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tObse.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					bGuardar.doClick();
 				}
 			}
 		});
