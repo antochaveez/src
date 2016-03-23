@@ -67,7 +67,7 @@ public class MenuPrincipal extends JFrame {
 	 */
 	public MenuPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagen/libros1.png")));
-		setTitle("BIBLIOTECA    V 1.1");
+		setTitle("BIBLIOTECA    V 1.3");
 		setType(Type.POPUP);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 768);
@@ -100,7 +100,7 @@ public class MenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				AbmEditor abmEditor = new AbmEditor();
-				abmEditor.setSize(900, 600);
+				abmEditor.setSize(900, 452);
 				abmEditor.setResizable(false);
 				abmEditor.setLocationRelativeTo(null);
 				//abmEditor.setAlwaysOnTop(true);

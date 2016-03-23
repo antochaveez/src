@@ -50,7 +50,7 @@ public class SessionEditor {
 	public static List<Editor> obtenerListaEditorPorFiltro(String filtro) {
 		EntityManager em = getEntityManager();
 		try {
-			Query q = em.createNativeQuery("SELECT * from editor WHERE (UPPER(edi_descri) LIKE '" + filtro + "%' OR cast( edi_codigo as varchar) LIKE '" + filtro + "%') ORDER by edi_codigo ASC",Editor.class);
+			Query q = em.createNativeQuery("SELECT * from editor WHERE (UPPER(edi_descri) LIKE '%" + filtro + "%' OR cast( edi_codigo as varchar) LIKE '%" + filtro + "%') ORDER by edi_codigo ASC",Editor.class);
 			return q.getResultList();
 		} finally {
 			em.close();

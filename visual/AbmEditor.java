@@ -42,8 +42,6 @@ public class AbmEditor extends JFrame {
 	private EditorTableModel modelo = new EditorTableModel();
 	private JTextField tCodigo;
 	private int fila;
-	private JTextField tDescri;
-	private JTextField tObse;
 	private JTextField tBusqueda;
 	private JButton bNuevo;
 	private JButton bModificar;
@@ -51,9 +49,11 @@ public class AbmEditor extends JFrame {
 	private JButton bSalir;
 	private JButton bCancelar;
 	private JButton bGuardar;
-	
+
 	private Fondito contentPane;
-	
+	private JScrollPane scrollPane_2;
+	private JTextArea tDescri;
+	private JTextArea tObse;
 
 	/**
 	 * Launch the application.
@@ -77,16 +77,17 @@ public class AbmEditor extends JFrame {
 	 */
 	public AbmEditor() {
 		setTitle("Registrar Editorial");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AbmEditor.class.getResource("/imagen/libros1.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				AbmEditor.class.getResource("/imagen/libros1.png")));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 900, 600);
-		contentPane = new Fondito("/imagen/fondo2.jpg");
-		contentPane.setBorder(new  EmptyBorder(5, 5, 5, 5));
+		setBounds(100, 100, 900, 452);
+		contentPane = new Fondito("/imagen/fondo3.png");
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 70, 378, 359);
+		scrollPane.setBounds(22, 21, 378, 359);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -95,42 +96,42 @@ public class AbmEditor extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				
+
 				if (bNuevo.getLabel().equals("Nuevo")) {
-					
-					if (arg0.getKeyCode()== 38 || arg0.getKeyCode()== 40) {
-						
+
+					if (arg0.getKeyCode() == 38 || arg0.getKeyCode() == 40) {
+
 						fila = table.getSelectedRow();
-						
-						tCodigo.setText(String.valueOf(table.getValueAt(fila, 0)));
-						tDescri.setText(String.valueOf(table.getValueAt(fila, 1))
-								.trim());
+
+						tCodigo.setText(String.valueOf(table
+								.getValueAt(fila, 0)));
+						tDescri.setText(String.valueOf(
+								table.getValueAt(fila, 1)).trim());
 						tObse.setText(String.valueOf(table.getValueAt(fila, 2))
 								.trim());
-						
+
 					}
-					
+
 				}
 			}
 		});
 		table.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				
-	
 				if (bNuevo.getLabel().equals("Nuevo")) {
 					fila = table.rowAtPoint(arg0.getPoint());
 					if (fila > -1) {
-						tCodigo.setText(String.valueOf(table.getValueAt(fila, 0)));
-						tDescri.setText(String.valueOf(table.getValueAt(fila, 1))
-								.trim());
+						tCodigo.setText(String.valueOf(table
+								.getValueAt(fila, 0)));
+						tDescri.setText(String.valueOf(
+								table.getValueAt(fila, 1)).trim());
 						tObse.setText(String.valueOf(table.getValueAt(fila, 2))
 								.trim());
-	
+
 					}
-				}	
-				
+				}
 
 			}
 		});
@@ -139,56 +140,45 @@ public class AbmEditor extends JFrame {
 		bSalir = new JButton("SALIR");
 		bSalir.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bSalir.setHorizontalTextPosition(SwingConstants.CENTER);
-		bSalir.setIcon(new ImageIcon(AbmEditor.class.getResource("/imagen/glyphicons-389-exit.png")));
+		bSalir.setIcon(new ImageIcon(AbmEditor.class
+				.getResource("/imagen/glyphicons-389-exit.png")));
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				dispose();
 			}
 		});
-		bSalir.setBounds(771, 454, 91, 43);
+		bSalir.setBounds(771, 364, 91, 43);
 		contentPane.add(bSalir);
 
 		tCodigo = new JTextField();
 		tCodigo.setDisabledTextColor(Color.BLACK);
 		tCodigo.setOpaque(false);
 		tCodigo.setEnabled(false);
-		tCodigo.setBounds(639, 139, 86, 23);
+		tCodigo.setBounds(624, 21, 86, 23);
 		contentPane.add(tCodigo);
 		tCodigo.setColumns(10);
 
 		JLabel lblCodigo = new JLabel("C\u00F3digo");
 		lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCodigo.setBounds(540, 139, 46, 14);
+		lblCodigo.setBounds(525, 21, 46, 14);
 		contentPane.add(lblCodigo);
-
-		tDescri = new JTextField();
-		tDescri.setEditable(false);
-		tDescri.setBounds(639, 201, 223, 23);
-		contentPane.add(tDescri);
-		tDescri.setColumns(10);
-		
-
-		tObse = new JTextField();
-		tObse.setEditable(false);
-		tObse.setBounds(639, 256, 223, 23);
-		contentPane.add(tObse);
-		tObse.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Descripci\u00F3n");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setBounds(540, 201, 89, 14);
+		lblNewLabel.setBounds(525, 83, 89, 14);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblObservacin = new JLabel("Observaci\u00F3n");
 		lblObservacin.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblObservacin.setBounds(540, 257, 89, 14);
+		lblObservacin.setBounds(525, 196, 89, 14);
 		contentPane.add(lblObservacin);
 
 		bNuevo = new JButton("Nuevo");
 		bNuevo.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bNuevo.setHorizontalTextPosition(SwingConstants.CENTER);
-		bNuevo.setIcon(new ImageIcon(AbmEditor.class.getResource("/imagen/glyphicons-146-folder-plus.png")));
+		bNuevo.setIcon(new ImageIcon(AbmEditor.class
+				.getResource("/imagen/glyphicons-146-folder-plus.png")));
 		bNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -217,28 +207,26 @@ public class AbmEditor extends JFrame {
 				bEliminar.setEnabled(false);
 				bCancelar.setEnabled(true);
 				bGuardar.setEnabled(true);
-				
+
 				tBusqueda.setEnabled(false);
-				
-				
-			
 
 				// table.setVisible(false);
 
 			}
 		});
-		bNuevo.setBounds(410, 103, 91, 50);
+		bNuevo.setBounds(410, 36, 91, 50);
 		contentPane.add(bNuevo);
 
 		bModificar = new JButton("Modificar");
 		bModificar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
-		bModificar.setIcon(new ImageIcon(AbmEditor.class.getResource("/imagen/glyphicons-149-folder-flag.png")));
+		bModificar.setIcon(new ImageIcon(AbmEditor.class
+				.getResource("/imagen/glyphicons-149-folder-flag.png")));
 		bModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				bEliminar.setEnabled(false);
-				bNuevo.setLabel("Agregar");
+				//bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bGuardar.setLabel("Actualizar");
@@ -258,30 +246,29 @@ public class AbmEditor extends JFrame {
 					tObse.setEditable(true);
 
 				}
-				
+
 				tBusqueda.setEnabled(false);
-				
 
 			}
 		});
-		bModificar.setBounds(410, 196, 91, 50);
+		bModificar.setBounds(410, 129, 91, 50);
 		contentPane.add(bModificar);
 
 		bEliminar = new JButton("Eliminar");
 		bEliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bEliminar.setVerticalTextPosition(SwingConstants.BOTTOM);
-		bEliminar.setIcon(new ImageIcon(AbmEditor.class.getResource("/imagen/glyphicons-147-folder-minus.png")));
+		bEliminar.setIcon(new ImageIcon(AbmEditor.class
+				.getResource("/imagen/glyphicons-147-folder-minus.png")));
 		bEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				bEliminar.setEnabled(false);
-				bNuevo.setLabel("Agregar");
+				//bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
-				bGuardar.setLabel("Eliminar");
 				bCancelar.setEnabled(true);
 				tBusqueda.setEnabled(false);
-				
+
 				String compara = tCodigo.getText();
 
 				if (compara.equals("")) {
@@ -289,168 +276,175 @@ public class AbmEditor extends JFrame {
 							"Seleccione un registro para eliminar ");
 					bCancelar.doClick();
 				} else {
-					bGuardar.setEnabled(true);
-				}
+					Editor editor = new Editor();
 
+					editor.setEdiDescri(tDescri.getText().trim());
+					editor.setEdiObse(tObse.getText().trim());
+
+					editor.setEdiNumero(Integer.valueOf(tCodigo.getText()));
+
+					int resp = JOptionPane.showConfirmDialog(
+							bEliminar,
+							"Desea eliminar la editorial? " + "Codigo: "
+									+ editor.getEdiNumero() + " "
+									+ editor.getEdiDescri(), "Confirmacion",
+							JOptionPane.OK_CANCEL_OPTION);
+
+					if (resp == 0) {
+						try {
+							SessionEditor.eliminar(editor);
+							JOptionPane.showMessageDialog(null,
+									"Editorial ha sido eliminado satisfactoriamente"
+											+ editor.getEdiNumero());
+
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+					bCancelar.doClick();
+					table.repaint();
+					mostrarDatos();
+
+				}
 			}
 		});
-		bEliminar.setBounds(410, 288, 91, 50);
+		bEliminar.setBounds(410, 221, 91, 50);
 		contentPane.add(bEliminar);
 
 		JLabel lblBuscar = new JLabel("Buscar");
 		lblBuscar.setForeground(Color.WHITE);
 		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblBuscar.setBounds(105, 451, 55, 23);
+		lblBuscar.setBounds(22, 384, 378, 23);
 		contentPane.add(lblBuscar);
 
 		tBusqueda = new JTextField();
 		tBusqueda.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				
-				modelo.setEdList(SessionEditor.obtenerListaEditorPorFiltro(tBusqueda.getText().toUpperCase()));
+
+				modelo.setEdList(SessionEditor
+						.obtenerListaEditorPorFiltro(tBusqueda.getText()
+								.toUpperCase()));
 				table.repaint();
-				
+
 			}
 		});
-		tBusqueda.setBounds(170, 453, 230, 23);
+		tBusqueda.setBounds(87, 386, 313, 23);
 		contentPane.add(tBusqueda);
 		tBusqueda.setColumns(10);
 
 		bCancelar = new JButton("Cancelar");
 		bCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
-		bCancelar.setIcon(new ImageIcon(AbmEditor.class.getResource("/imagen/glyphicons-193-remove-sign.png")));
+		bCancelar.setIcon(new ImageIcon(AbmEditor.class
+				.getResource("/imagen/glyphicons-193-remove-sign.png")));
 		bCancelar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				bNuevo.setEnabled(true);
 				bModificar.setEnabled(true);
 				bEliminar.setEnabled(true);
-				
+
 				bGuardar.setEnabled(false);
 				bCancelar.setEnabled(false);
-				
+
 				tCodigo.setText("");
 				tDescri.setText("");
 				tObse.setText("");
-				
+
 				tDescri.setEditable(false);
 				tObse.setEditable(false);
-				
+
 				table.clearSelection();
 				table.setVisible(true);
-				
+
 				bNuevo.setLabel("Nuevo");
 				bGuardar.setLabel("Guardar");
-				
+
 				tBusqueda.setEnabled(true);
-				
-				
-				
+
 				table.repaint();
 				mostrarDatos();
-				
+
 			}
 		});
 		bCancelar.setEnabled(false);
-		bCancelar.setBounds(771, 366, 91, 43);
+		bCancelar.setBounds(771, 304, 91, 43);
 		contentPane.add(bCancelar);
 
 		bGuardar = new JButton("Guardar");
 		bGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
-		bGuardar.setIcon(new ImageIcon(AbmEditor.class.getResource("/imagen/glyphicons-194-ok-sign.png")));
+		bGuardar.setIcon(new ImageIcon(AbmEditor.class
+				.getResource("/imagen/glyphicons-194-ok-sign.png")));
 		bGuardar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-				if (tDescri.getText().trim().isEmpty() 
-						|| tObse.getText().trim().isEmpty()){
-					JOptionPane.showMessageDialog(null, "Existen campos vacios. Complete antes de continuar");
-					
+
+				if (tDescri.getText().trim().isEmpty() || tObse.getText().trim().isEmpty()) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Existen campos vacios. Complete antes de continuar");
+
 					if (tDescri.getText().trim().isEmpty()) {
-						
+
 						tDescri.requestFocus();
+
+					} else {
 						
-						
-					}else {
 						if (tObse.getText().trim().isEmpty()) {
-							tObse.requestFocus();	
+							tObse.requestFocus();
 						}
 					}
-					
 				}else {
 					
 					Editor editor = new Editor();
-					
+
 					editor.setEdiDescri(tDescri.getText().trim());
 					editor.setEdiObse(tObse.getText().trim());
 					
-					if (bGuardar.getLabel().equals("Eliminar")) {
+					//JOptionPane.showMessageDialog(null,"" + tDescri.getText().trim());
+					//JOptionPane.showMessageDialog(null,"" + tObse.getText().trim());
+
+					if (bGuardar.getLabel().equals("Actualizar")) {
+
 						editor.setEdiNumero(Integer.valueOf(tCodigo.getText()));
-						
-						int resp = JOptionPane.showConfirmDialog(bEliminar, "Desea eliminar la editorial? "+ "Codigo: "+ editor.getEdiNumero()+ " " + editor.getEdiDescri(),"Confirmacion",JOptionPane.OK_CANCEL_OPTION);
-						
-						if (resp == 0) {
-							try {
-								SessionEditor.eliminar(editor);
-								JOptionPane.showMessageDialog(null, "Editorial ha sido eliminado satisfactoriamente"+ editor.getEdiNumero());
-								
-								
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
-							
-						}
-						bCancelar.doClick();
-						table.repaint();
-						mostrarDatos();
-						
-						
-					}else {
-						if (bGuardar.getLabel().equals("Actualizar")) {
-							editor.setEdiNumero(Integer.valueOf(tCodigo.getText()));
-							
+
 							try {
 								Editor editorBuscar = SessionEditor.obtenerEditor(editor);
-								SessionEditor.editar(editor);
 								
-								JOptionPane.showMessageDialog(null, "Editor actualizado");
-								
-									
-								
+								if (editorBuscar != null) {
+									SessionEditor.editar(editor);
+									JOptionPane.showMessageDialog(null,"Editor actualizado");
+								}					
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							
-							
-							
-														
-						}else {
-							try {
-								SessionEditor.insertar(editor);
-								JOptionPane.showMessageDialog(null, "Editorial creado. Codigo = "+ editor.getEdiNumero());
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
-							
-							
-						}
-						bCancelar.doClick();
-						table.repaint();
-						mostrarDatos();
-						
 					}
+					
+					if (bNuevo.getLabel().equals("Agregar")) {
+						try {
+							SessionEditor.insertar(editor);
+							JOptionPane.showMessageDialog(null,"Editorial creado. Codigo = " + editor.getEdiNumero());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}				
+				}
+					bCancelar.doClick();
+					table.repaint();
+					mostrarDatos();
+					
+					
+					
 				}
 			}
 		});
-		
-		
+
 		bSalir.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -481,7 +475,7 @@ public class AbmEditor extends JFrame {
 
 			}
 		});
-		
+
 		bGuardar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -500,9 +494,27 @@ public class AbmEditor extends JFrame {
 			}
 		});
 		bGuardar.setEnabled(false);
-		
-		bGuardar.setBounds(649, 366, 91, 43);
+
+		bGuardar.setBounds(649, 304, 91, 43);
 		contentPane.add(bGuardar);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(624, 83, 238, 83);
+		contentPane.add(scrollPane_1);
+
+		tDescri = new JTextArea();
+		tDescri.setEditable(false);
+		tDescri.setLineWrap(true);
+		scrollPane_1.setViewportView(tDescri);
+
+		scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(624, 196, 238, 83);
+		contentPane.add(scrollPane_2);
+
+		tObse = new JTextArea();
+		tObse.setEditable(false);
+		tObse.setLineWrap(true);
+		scrollPane_2.setViewportView(tObse);
 		mostrarDatos();
 	}
 
@@ -540,14 +552,6 @@ public class AbmEditor extends JFrame {
 		return tCodigo;
 	}
 
-	public JTextField getTDescri() {
-		return tDescri;
-	}
-
-	public JTextField getTObse() {
-		return tObse;
-	}
-
 	public JTextField getTBusqueda() {
 		return tBusqueda;
 	}
@@ -558,5 +562,13 @@ public class AbmEditor extends JFrame {
 
 	public JButton getBGuardar() {
 		return bGuardar;
+	}
+
+	public JTextArea getTDescri() {
+		return tDescri;
+	}
+
+	public JTextArea getTObse() {
+		return tObse;
 	}
 }

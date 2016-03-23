@@ -19,7 +19,11 @@ import java.awt.event.ActionEvent;
 
 public class Configuracion extends JFrame {
 
-    private JPanel contentPane;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
     private JLabel lblOrganizacion;
     private JLabel lblDeumor;
     private JTextField txtOrga;
@@ -40,6 +44,7 @@ public class Configuracion extends JFrame {
                 try {
                     Configuracion frame = new Configuracion();
                     frame.setVisible(true);
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -159,7 +164,6 @@ public class Configuracion extends JFrame {
             txtDiapre.setText(config.getCfgDiapre().toString());
         }
         
-        
+    }   
         
     }
-}
