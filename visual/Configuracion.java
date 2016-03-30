@@ -132,6 +132,12 @@ public class Configuracion extends JFrame {
                     config.setCfgDeumor(Integer.parseInt( txtDeumor.getText() ));
                     config.setCfgDiamor(Integer.parseInt( txtDiamor.getText() ));
                     config.setCfgDiapre(Integer.parseInt( txtDiapre.getText() ));
+                    try {
+                        SessionConfiguracion.cambiarConfiguracion(config);
+                    } catch (Exception e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                     // Cerrar la ventana de configuracion despues de guardar los datos
                     dispose();
                 }
