@@ -148,7 +148,7 @@ public class AbmEditor extends JFrame {
 				dispose();
 			}
 		});
-		bSalir.setBounds(771, 364, 91, 43);
+		bSalir.setBounds(771, 364, 91, 46);
 		contentPane.add(bSalir);
 
 		tCodigo = new JTextField();
@@ -265,7 +265,7 @@ public class AbmEditor extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				bEliminar.setEnabled(false);
-				//bNuevo.setLabel("Agregar");
+				bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bGuardar.setLabel("Actualizar");
@@ -431,7 +431,7 @@ public class AbmEditor extends JFrame {
 			}
 		});
 		bCancelar.setEnabled(false);
-		bCancelar.setBounds(771, 304, 91, 43);
+		bCancelar.setBounds(771, 304, 91, 46);
 		contentPane.add(bCancelar);
 
 		bGuardar = new JButton("Guardar");
@@ -561,7 +561,7 @@ public class AbmEditor extends JFrame {
 		});
 		bGuardar.setEnabled(false);
 
-		bGuardar.setBounds(649, 304, 91, 43);
+		bGuardar.setBounds(649, 304, 91, 46);
 		contentPane.add(bGuardar);
 
 		JScrollPane scrollPane_1 = new JScrollPane();

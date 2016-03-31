@@ -596,7 +596,7 @@ public class AbmLector extends JFrame {
 			
 			}
 		});
-		bGuardar.setBounds(649, 351, 91, 43);
+		bGuardar.setBounds(649, 351, 91, 46);
 		bGuardar.setBackground(Color.LIGHT_GRAY);
 		bGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -646,7 +646,7 @@ public class AbmLector extends JFrame {
 			
 			}
 		});
-		bCancelar.setBounds(771, 351, 91, 43);
+		bCancelar.setBounds(771, 351, 91, 46);
 		bCancelar.setBackground(Color.LIGHT_GRAY);
 		bCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -655,7 +655,7 @@ public class AbmLector extends JFrame {
 
 		bSalir = new JButton("SALIR");
 		bSalir.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-389-exit.png")));
-		bSalir.setBounds(771, 405, 91, 43);
+		bSalir.setBounds(771, 405, 91, 46);
 		bSalir.setBackground(Color.LIGHT_GRAY);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -107,7 +107,9 @@ public class InterfazTablaEditorial extends JDialog {
 				bOk = new JButton("OK");
 				bOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						AbmLibros.tAutor.requestFocus();
 						dispose();
+						
 					}
 				});
 				bOk.setActionCommand("OK");

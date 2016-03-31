@@ -58,7 +58,7 @@ public class AbmLibros extends JFrame {
 	private JTextField tBusqueda;
 	private JTextArea tObse;
 	private JTextArea tDescri;
-	private JTextArea tAutor;
+	public static JTextArea tAutor;
 	private JTextArea tIsbn;
 	public static int auxCodEditorial;
 	private JButton bBusqueda;
@@ -101,6 +101,8 @@ public class AbmLibros extends JFrame {
 		
 		
 		bNuevo = new JButton("Nuevo");
+		bNuevo.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-146-folder-plus.png")));
+		bNuevo.setForeground(Color.BLACK);
 		bNuevo.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -125,13 +127,16 @@ public class AbmLibros extends JFrame {
 				tIsbn.setText("");
 				tObse.setText("");
 
+				
 				tCodigo.setEditable(false);
 				tDescri.setEditable(true);
 				tDescri.requestFocus();
-				tEditorial.setEditable(true);
+				tEditorial.setEditable(false);
 				tAutor.setEditable(true);
 				tIsbn.setEditable(true);
 				tObse.setEditable(true);
+				bBusqueda.setEnabled(true);
+				
 								
 
 				bModificar.setEnabled(false);
@@ -159,6 +164,8 @@ public class AbmLibros extends JFrame {
 		contentPane.add(bNuevo);
 		
 		bModificar = new JButton("Modificar");
+		bModificar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-149-folder-flag.png")));
+		bModificar.setForeground(Color.BLACK);
 		bModificar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -166,6 +173,7 @@ public class AbmLibros extends JFrame {
 
 
 				bEliminar.setEnabled(false);
+				bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bGuardar.setLabel("Actualizar");
@@ -182,7 +190,8 @@ public class AbmLibros extends JFrame {
 
 					tCodigo.setEditable(false);
 					tDescri.setEditable(true);
-					tEditorial.setEditable(true);
+					tEditorial.setEditable(false);
+					bBusqueda.setEnabled(true);
 					tAutor.setEditable(true);
 					tIsbn.setEditable(true);
 					tObse.setEditable(true);
@@ -205,6 +214,8 @@ public class AbmLibros extends JFrame {
 		contentPane.add(bModificar);
 		
 		bEliminar = new JButton("Eliminar");
+		bEliminar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-147-folder-minus.png")));
+		bEliminar.setForeground(Color.BLACK);
 		bEliminar.setBackground(Color.GRAY);
 		bEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -265,6 +276,9 @@ public class AbmLibros extends JFrame {
 		contentPane.add(bEliminar);
 		
 		bCancelar = new JButton("Cancelar");
+		bCancelar.setBackground(Color.GRAY);
+		bCancelar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-193-remove-sign.png")));
+		bCancelar.setForeground(Color.BLACK);
 		bCancelar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -288,6 +302,7 @@ public class AbmLibros extends JFrame {
 				
 				tDescri.setEditable(false);
 				tEditorial.setEditable(false);
+				bBusqueda.setEnabled(false);
 				tAutor.setEditable(false);
 				tIsbn.setEditable(false);
 				tObse.setEditable(false);
@@ -310,13 +325,16 @@ public class AbmLibros extends JFrame {
 			
 			}
 		});
-		bCancelar.setBounds(783, 411, 91, 43);
+		bCancelar.setBounds(783, 411, 91, 46);
 		bCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bCancelar.setEnabled(false);
 		contentPane.add(bCancelar);
 		
 		bGuardar = new JButton("Guardar");
+		bGuardar.setBackground(Color.GRAY);
+		bGuardar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-194-ok-sign.png")));
+		bGuardar.setForeground(Color.BLACK);
 		bGuardar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -408,14 +426,17 @@ public class AbmLibros extends JFrame {
 			
 			}
 		});
-		bGuardar.setBounds(661, 411, 91, 43);
+		bGuardar.setBounds(661, 411, 91, 46);
 		bGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bGuardar.setEnabled(false);
 		contentPane.add(bGuardar);
 		
 		bSalir = new JButton("SALIR");
-		bSalir.setBounds(783, 465, 91, 43);
+		bSalir.setBackground(Color.GRAY);
+		bSalir.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-389-exit.png")));
+		bSalir.setForeground(Color.BLACK);
+		bSalir.setBounds(783, 465, 91, 46);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -459,7 +480,7 @@ public class AbmLibros extends JFrame {
 		tCodigo = new JTextField();
 		tCodigo.setEditable(false);
 		tCodigo.setBounds(91, 36, 216, 20);
-		tCodigo.setBorder(null);
+		tCodigo.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(tCodigo);
 		tCodigo.setColumns(10);
 		
@@ -475,7 +496,7 @@ public class AbmLibros extends JFrame {
 			}
 		});
 		tEditorial.setBounds(91, 131, 216, 20);
-		tEditorial.setBorder(null);
+		tEditorial.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(tEditorial);
 		tEditorial.setColumns(10);
 		
@@ -489,6 +510,7 @@ public class AbmLibros extends JFrame {
 		scrollPane_1.setViewportView(tDescri);
 		
 		bBusqueda = new JButton("");
+		bBusqueda.setEnabled(false);
 		bBusqueda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InterfazTablaEditorial ite = new InterfazTablaEditorial();
@@ -549,6 +571,14 @@ public class AbmLibros extends JFrame {
 		tBusqueda.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_TAB) {
+					bNuevo.requestFocus();
+				}
+			}
+		});
 		scrollPane.setBounds(22, 22, 378, 378);
 		contentPane.add(scrollPane);
 		

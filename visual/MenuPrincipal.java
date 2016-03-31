@@ -93,7 +93,23 @@ public class MenuPrincipal extends JFrame {
 		mnTablas.setMnemonic('T');
 		menuBar.add(mnTablas);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Libros");
+		final JMenuItem mntmNewMenuItem = new JMenuItem("Libros");
+		mntmNewMenuItem.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				mntmNewMenuItem.doClick();
+			}
+		});
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				AbmLibros abmLibro = new AbmLibros();
+				abmLibro.setSize(900, 560);
+				abmLibro.setResizable(false);
+				abmLibro.setLocationRelativeTo(null);
+				abmLibro.setVisible(true);
+			}
+		});
 		mntmNewMenuItem.setMnemonic('L');
 		mnTablas.add(mntmNewMenuItem);
 		
@@ -184,7 +200,25 @@ public class MenuPrincipal extends JFrame {
 		bPrestamo.setBounds(0, 25, 125, 71);
 		contentPane.add(bPrestamo);
 		
-		JButton bLibros = new JButton("Libros");
+		final JButton bLibros = new JButton("Libros");
+		bLibros.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					bLibros.doClick();
+				}
+				
+			}
+		});
+		bLibros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AbmLibros abmLibro = new AbmLibros();
+				abmLibro.setSize(900, 560);
+				abmLibro.setResizable(false);
+				abmLibro.setLocationRelativeTo(null);
+				abmLibro.setVisible(true);
+			}
+		});
 		bLibros.setBackground(Color.GRAY);
 		bLibros.setForeground(Color.BLACK);
 		bLibros.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -193,7 +227,24 @@ public class MenuPrincipal extends JFrame {
 		bLibros.setBounds(0, 94, 125, 71);
 		contentPane.add(bLibros);
 		
-		JButton bLector = new JButton("Lector");
+		final JButton bLector = new JButton("Lector");
+		bLector.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					bLector.doClick();
+				}
+			}
+		});
+		bLector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AbmLector abmLector = new AbmLector();
+				abmLector.setSize(900, 500);
+				abmLector.setResizable(false);
+				abmLector.setLocationRelativeTo(null);
+				abmLector.setVisible(true);
+			}
+		});
 		bLector.setBackground(Color.GRAY);
 		bLector.setForeground(Color.BLACK);
 		bLector.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -207,7 +258,7 @@ public class MenuPrincipal extends JFrame {
 		bSalir.setForeground(Color.BLACK);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				System.exit(0);
 			}
 		});
 		bSalir.setHorizontalTextPosition(SwingConstants.CENTER);
