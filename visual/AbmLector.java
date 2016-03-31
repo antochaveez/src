@@ -29,6 +29,7 @@ import javax.swing.table.TableColumnModel;
 import session.SessionLector;
 import tableModale.LectorTableModel;
 import entidad.Lector;
+import javax.swing.ImageIcon;
 
 public class AbmLector extends JFrame {
 
@@ -88,6 +89,24 @@ public class AbmLector extends JFrame {
 		contentPane.setLayout(null);
 
 		bNuevo = new JButton("Nuevo");
+		bNuevo.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-146-folder-plus.png")));
+		bNuevo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bModificar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bNuevo.doClick();
+				}
+			
+			
+			}
+		});
 		bNuevo.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -143,13 +162,38 @@ public class AbmLector extends JFrame {
 			
 
 		bModificar = new JButton("Modificar");
+		bModificar.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-149-folder-flag.png")));
+		bModificar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bNuevo.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bEliminar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bModificar.doClick();
+
+				}
+			
+			
+			}
+		});
 		bModificar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 
 
 				bEliminar.setEnabled(false);
-				bNuevo.setLabel("Agregar");
+				//bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bGuardar.setLabel("Actualizar");
@@ -169,6 +213,7 @@ public class AbmLector extends JFrame {
 					tCedula.setEditable(true);
 					tDireccion.setEditable(true);
 					tTelefo.setEditable(true);
+					tNombre.requestFocus();
 					
 
 				}
@@ -186,6 +231,80 @@ public class AbmLector extends JFrame {
 		contentPane.add(bModificar);	
 
 		bEliminar = new JButton("Eliminar");
+		bEliminar.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-147-folder-minus.png")));
+		bEliminar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bModificar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tBusqueda.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bEliminar.doClick();
+				}
+			
+			
+			}
+		});
+		bEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+
+				bEliminar.setEnabled(false);
+				//bNuevo.setLabel("Agregar");
+				bNuevo.setEnabled(false);
+				bModificar.setEnabled(false);
+				bCancelar.setEnabled(true);
+				tBusqueda.setEnabled(false);
+
+				String compara = tCodigo.getText();
+
+				if (compara.equals("")) {
+					JOptionPane.showMessageDialog(null,
+							"Seleccione un registro para eliminar ");
+					bCancelar.doClick();
+				} else {
+					Lector lector = new Lector();
+	
+					lector.setLecCodigo(Integer.valueOf(tCodigo.getText()));
+
+					int resp = JOptionPane.showConfirmDialog(
+							bEliminar,
+							"Desea eliminar la editorial? " + "Codigo: "
+									+ lector.getLecCodigo() + " "
+									+ lector.getLecNombre(), "Confirmacion",
+							JOptionPane.OK_CANCEL_OPTION );
+						
+					if (resp == 0) {
+						try {
+							SessionLector.eliminar(lector);
+							JOptionPane.showMessageDialog(null,
+									"Lector ha sido eliminado satisfactoriamente "
+											+ lector.getLecNombre());
+
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+					bCancelar.doClick();
+					table.repaint();
+					mostrarDatos();
+
+				}
+			
+			}
+		});
 		bEliminar.setBounds(406, 234, 91, 50);
 		bEliminar.setBackground(Color.LIGHT_GRAY);
 		bEliminar.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -221,6 +340,37 @@ public class AbmLector extends JFrame {
 		tCodigo.setColumns(10);
 
 		tCedula = new JTextField();
+		tCedula.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tNombre.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tDireccion.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tCedula.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese CI, campo obligatorio");
+						tCedula.requestFocus();
+
+					} else {
+						tDireccion.setEnabled(true);
+						tDireccion.requestFocus();
+					}
+
+				}
+			
+			}
+		});
 		tCedula.setEditable(false);
 		tCedula.setBounds(63, 125, 273, 20);
 		tCedula.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
@@ -247,9 +397,30 @@ public class AbmLector extends JFrame {
 		tNombre.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == 9) {
+				if (arg0.getKeyCode() == KeyEvent.VK_TAB) {
 					tCedula.requestFocus();
 				}
+
+
+				if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+					tCedula.requestFocus();
+
+				}
+
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tNombre.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Nombre, campo obligatorio");
+						tNombre.requestFocus();
+
+					} else {
+						tCedula.setEnabled(true);
+						tCedula.requestFocus();
+					}
+
+				}
+			
 			}
 		});
 		tNombre.setLocation(63, 0);
@@ -265,10 +436,36 @@ public class AbmLector extends JFrame {
 		tDireccion.setEditable(false);
 		tDireccion.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == 9) {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
 					tTelefo.requestFocus();
 				}
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tCedula.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tTelefo.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tDireccion.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Dirección, campo obligatorio");
+						tDireccion.requestFocus();
+
+					} else {
+						tTelefo.setEnabled(true);
+						tTelefo.requestFocus();
+					}
+
+				}
+			
 			}
 		});
 		tDireccion.setLocation(63, 0);
@@ -283,10 +480,36 @@ public class AbmLector extends JFrame {
 		tTelefo.setEditable(false);
 		tTelefo.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == 9) {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
 					bGuardar.requestFocus();
 				}
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tDireccion.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bGuardar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tTelefo.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Teléfono, campo obligatorio");
+						tTelefo.requestFocus();
+
+					} else {
+						bGuardar.setEnabled(true);
+						bGuardar.requestFocus();
+					}
+
+				}
+			
 			}
 		});
 		tTelefo.setLocation(63, 0);
@@ -294,6 +517,85 @@ public class AbmLector extends JFrame {
 		scrollPane_3.setViewportView(tTelefo);
 			
 		bGuardar = new JButton("Guardar");
+		bGuardar.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-194-ok-sign.png")));
+		bGuardar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent arg0) {
+
+
+				if (tNombre.getText().trim().isEmpty() || tCedula.getText().isEmpty() 
+					|| tDireccion.getText().trim().isEmpty() || tTelefo.getText().trim().isEmpty()) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Existen campos vacios. Complete antes de continuar");
+
+					if (tNombre.getText().trim().isEmpty()) {
+
+						tNombre.requestFocus();
+
+					} else {
+						
+						if (tCedula.getText().trim().isEmpty()) {
+							tCedula.requestFocus();
+						}else {
+							if (tDireccion.getText().trim().isEmpty()) {
+								tDireccion.requestFocus();
+							}else {
+								if (tTelefo.getText().trim().isEmpty()) {
+									tTelefo.requestFocus();
+								}
+							}
+						}
+					}
+				}else {
+					
+					Lector lector = new Lector();
+
+					lector.setLecNombre(tNombre.getText().trim());
+					lector.setLecCedula(Integer.valueOf(tCedula.getText()));
+					lector.setLecDireccion(tDireccion.getText().trim());
+					lector.setLecTelefo(tTelefo.getText().trim());
+					
+					
+					//JOptionPane.showMessageDialog(null,"" + tDescri.getText().trim());
+					//JOptionPane.showMessageDialog(null,"" + tObse.getText().trim());
+
+					if (bGuardar.getLabel().equals("Actualizar")) {
+
+						lector.setLecCodigo(Integer.valueOf(tCodigo.getText()));
+
+							try {
+								Lector lectorBuscar = SessionLector.obtenerEditor(lector);
+								
+								if (lectorBuscar != null) {
+									SessionLector.editar(lector);
+									JOptionPane.showMessageDialog(null,"Lector actualizado");
+								}					
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					}
+					
+					if (bNuevo.getLabel().equals("Agregar")) {
+						try {
+							SessionLector.insertar(lector);
+							JOptionPane.showMessageDialog(null,"Lector creado. Codigo = " + lector.getLecCodigo());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}				
+				}
+					bCancelar.doClick();
+					table.repaint();
+					mostrarDatos();
+					
+					
+					
+				}
+			
+			}
+		});
 		bGuardar.setBounds(649, 351, 91, 43);
 		bGuardar.setBackground(Color.LIGHT_GRAY);
 		bGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -302,6 +604,7 @@ public class AbmLector extends JFrame {
 		contentPane.add(bGuardar);
 
 		bCancelar = new JButton("Cancelar");
+		bCancelar.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-193-remove-sign.png")));
 		bCancelar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -351,6 +654,7 @@ public class AbmLector extends JFrame {
 		contentPane.add(bCancelar);	
 
 		bSalir = new JButton("SALIR");
+		bSalir.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-389-exit.png")));
 		bSalir.setBounds(771, 405, 91, 43);
 		bSalir.setBackground(Color.LIGHT_GRAY);
 		bSalir.addActionListener(new ActionListener() {
@@ -364,6 +668,18 @@ public class AbmLector extends JFrame {
 		contentPane.add(bSalir);
 
 		tBusqueda = new JTextField();
+		tBusqueda.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+
+
+				modelo.setLecList(SessionLector.obtenerListaLectorPorFiltro(tBusqueda.getText()
+								.toUpperCase()));
+				table.repaint();
+
+			
+			}
+		});
 		tBusqueda.setBounds(72, 381, 322, 23);
 		tBusqueda.setColumns(10);
 		contentPane.add(tBusqueda);
@@ -407,6 +723,12 @@ public class AbmLector extends JFrame {
 
 				}
 			}
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_TAB) {
+					bNuevo.requestFocus();
+				}
+			}
 		});
 		table.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
@@ -432,10 +754,65 @@ public class AbmLector extends JFrame {
 
 			}
 		});
+		
+		bSalir.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bCancelar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bSalir.doClick();
+				}
+			}
+		});
+		bCancelar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					bSalir.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					bGuardar.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tTelefo.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					bCancelar.doClick();
+				}
+
+			}
+		});
+
+		bGuardar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					bCancelar.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tTelefo.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					bGuardar.doClick();
+				}
+			}
+		});
 		scrollPane.setViewportView(table);
 
 		mostrarDatos();
 	}
+	
+	
 
 	private void mostrarDatos() {
 

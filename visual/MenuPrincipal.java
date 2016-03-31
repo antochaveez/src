@@ -28,6 +28,8 @@ import entidad.Config;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MenuPrincipal extends JFrame {
 
@@ -81,21 +83,45 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(menuBar);
 		
 		JMenu mnPr = new JMenu("Pr\u00E9stamo");
+		mnPr.setMnemonic('P');
 		menuBar.add(mnPr);
 		
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar Pr\u00E9stamos");
 		mnPr.add(mntmRegistrar);
 		
 		JMenu mnTablas = new JMenu("Tablas");
+		mnTablas.setMnemonic('T');
 		menuBar.add(mnTablas);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Libros");
+		mntmNewMenuItem.setMnemonic('L');
 		mnTablas.add(mntmNewMenuItem);
 		
-		JMenuItem mntmLector = new JMenuItem("Lector");
+		final JMenuItem mntmLector = new JMenuItem("Lector");
+		mntmLector.setMnemonic('e');
+		mntmLector.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					mntmLector.doClick();
+					
+				}
+			}
+		});
+		mntmLector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AbmLector abmLector = new AbmLector();
+				abmLector.setSize(900, 500);
+				abmLector.setResizable(false);
+				abmLector.setLocationRelativeTo(null);
+				abmLector.setVisible(true);
+				
+			}
+		});
 		mnTablas.add(mntmLector);
 		
 		JMenuItem mntmEditorial = new JMenuItem("Editorial");
+		mntmEditorial.setMnemonic('d');
 		mntmEditorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -110,6 +136,7 @@ public class MenuPrincipal extends JFrame {
 		mnTablas.add(mntmEditorial);
 		
 		JMenu mnInformes = new JMenu("Informes");
+		mnInformes.setMnemonic('I');
 		menuBar.add(mnInformes);
 		
 		JMenuItem mntmInformes = new JMenuItem("Listado de Libros");
@@ -128,6 +155,7 @@ public class MenuPrincipal extends JFrame {
 		mnInformes.add(mntmInformeDeDeudas);
 		
 		JMenu mnUtilidades = new JMenu("Utilidades");
+		mnUtilidades.setMnemonic('U');
 		menuBar.add(mnUtilidades);
 		
 		JMenuItem mntmInicializacionDeDatos = new JMenuItem("Inicializaci\u00F3n de Datos");

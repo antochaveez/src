@@ -110,7 +110,7 @@ public class Configuracion extends JFrame {
                     txtDiamor.getText().trim().isEmpty() ||
                     txtDiapre.getText().trim().isEmpty() ||
                     txtOrga.getText().trim().isEmpty() ){
-                   JOptionPane.showMessageDialog(null, "Existen campos vacÃ­os, complete antes de guardar"); 
+                   JOptionPane.showMessageDialog(null, "Existen campos vacíos, complete antes de guardar"); 
                    if (txtOrga.getText().trim().isEmpty()){
                        txtOrga.requestFocus();
                    } else {

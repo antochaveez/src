@@ -33,15 +33,15 @@ public class EditorTableModel extends AbstractTableModel {
 	public String getColumnName(int columnIndex) {
 
 		if (columnIndex == 0) {
-			return "Codigo";
+			return "Código";
 		}
 
 		if (columnIndex == 1) {
-			return "Descripcion";
+			return "Descripción";
 		}
 
 		if (columnIndex == 2) {
-			return "Observacion";
+			return "Observación";
 		}
 
 		return "";

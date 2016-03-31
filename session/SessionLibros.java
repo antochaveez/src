@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+
 import entidad.Libro;
 
 public class SessionLibros {
@@ -72,7 +73,35 @@ public class SessionLibros {
 		EntityManager em = getEntityManager();
 		return em.find(Libro.class, libro.getLibCodigo());
 	}
-
+	public static Libro irAlUltimo() {
+		EntityManager em = getEntityManager();
+		try {
+			Query q = em.createNativeQuery(
+					"SELECT * FROM libro ORDER BY lib_codigo DESC",
+					Libro.class);
+			q.setMaxResults(1);
+			return (Libro) q.getSingleResult();
+		} finally {
+			em.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Libro> obtenerListaLibroPorFiltro(String filtro) {
+		EntityManager em = getEntityManager();
+		try {
+			Query q = em.createNativeQuery(
+					"SELECT * from libro WHERE (UPPER(lib_descri) LIKE '%"
+							+ filtro
+							+ "%' OR cast( lib_codigo as varchar) LIKE '"
+							+ filtro + "%') ORDER by lib_codigo ASC",
+					Libro.class);
+			return q.getResultList();
+		} finally {
+			em.close();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static List<Libro> obtenerListaLibro() {
 		EntityManager em = getEntityManager();

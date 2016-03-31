@@ -53,7 +53,7 @@ public class SessionLector {
 		EntityManager em = getEntityManager();
 		try {
 			Query q = em.createNativeQuery(
-					"SELECT * from lector WHERE (UPPER(lec_nombre) LIKE '"
+					"SELECT * from lector WHERE (UPPER(lec_nombre) LIKE '%"
 							+ filtro
 							+ "%' OR cast( lec_codigo as varchar) LIKE '"
 							+ filtro + "%') ORDER by lec_codigo ASC",

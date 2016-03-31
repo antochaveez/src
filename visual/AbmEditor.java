@@ -1,7 +1,9 @@
 package visual;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -9,27 +11,22 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableColumnModel;
 
 import session.SessionEditor;
 import tableModale.EditorTableModel;
 import entidad.Editor;
-import java.awt.Color;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import java.awt.Toolkit;
-import java.awt.Window.Type;
-import java.awt.Panel;
-import javax.swing.JTextArea;
 
 public class AbmEditor extends JFrame {
 
@@ -111,6 +108,9 @@ public class AbmEditor extends JFrame {
 								.trim());
 
 					}
+					if (arg0.getKeyCode() == KeyEvent.VK_TAB) {
+						bNuevo.requestFocus();
+					}
 
 				}
 			}
@@ -175,11 +175,27 @@ public class AbmEditor extends JFrame {
 		contentPane.add(lblObservacin);
 
 		bNuevo = new JButton("Nuevo");
+		bNuevo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bModificar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bNuevo.doClick();
+				}
+			
+			}
+		});
 		bNuevo.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bNuevo.setHorizontalTextPosition(SwingConstants.CENTER);
 		bNuevo.setIcon(new ImageIcon(AbmEditor.class
 				.getResource("/imagen/glyphicons-146-folder-plus.png")));
 		bNuevo.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
@@ -218,11 +234,34 @@ public class AbmEditor extends JFrame {
 		contentPane.add(bNuevo);
 
 		bModificar = new JButton("Modificar");
+		bModificar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bNuevo.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bEliminar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bModificar.doClick();
+
+				}
+			
+			}
+		});
 		bModificar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bModificar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bModificar.setIcon(new ImageIcon(AbmEditor.class
 				.getResource("/imagen/glyphicons-149-folder-flag.png")));
 		bModificar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 
 				bEliminar.setEnabled(false);
@@ -244,7 +283,7 @@ public class AbmEditor extends JFrame {
 					tCodigo.setEditable(false);
 					tDescri.setEditable(true);
 					tObse.setEditable(true);
-
+					tDescri.requestFocus();
 				}
 
 				tBusqueda.setEnabled(false);
@@ -255,6 +294,27 @@ public class AbmEditor extends JFrame {
 		contentPane.add(bModificar);
 
 		bEliminar = new JButton("Eliminar");
+		bEliminar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bModificar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tBusqueda.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bEliminar.doClick();
+				}
+			
+			}
+		});
 		bEliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bEliminar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bEliminar.setIcon(new ImageIcon(AbmEditor.class
@@ -263,7 +323,6 @@ public class AbmEditor extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				bEliminar.setEnabled(false);
-				//bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bCancelar.setEnabled(true);
@@ -298,9 +357,9 @@ public class AbmEditor extends JFrame {
 											+ editor.getEdiNumero());
 
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+							JOptionPane.showMessageDialog(null,"Este registro no puede ser eliminado por"
+									+ "\n que esta siendo utilizado por otra tabla");
+					}
 
 					}
 					bCancelar.doClick();
@@ -455,6 +514,9 @@ public class AbmEditor extends JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					tObse.requestFocus();
 				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bSalir.doClick();
+				}
 			}
 		});
 		bCancelar.addKeyListener(new KeyAdapter() {
@@ -471,6 +533,10 @@ public class AbmEditor extends JFrame {
 
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					tObse.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					bCancelar.doClick();
 				}
 
 			}
@@ -503,6 +569,34 @@ public class AbmEditor extends JFrame {
 		contentPane.add(scrollPane_1);
 
 		tDescri = new JTextArea();
+		tDescri.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+
+				if (arg0.getKeyCode() == KeyEvent.VK_TAB) {
+					tObse.requestFocus();
+				}
+				if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+					tObse.requestFocus();
+
+				}
+
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tDescri.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Descripción, campo obligatorio");
+						tDescri.requestFocus();
+
+					} else {
+						tObse.setEnabled(true);
+						tObse.requestFocus();
+					}
+
+				}
+			
+			}
+		});
 		tDescri.setEditable(false);
 		tDescri.setLineWrap(true);
 		scrollPane_1.setViewportView(tDescri);
@@ -512,6 +606,39 @@ public class AbmEditor extends JFrame {
 		contentPane.add(scrollPane_2);
 
 		tObse = new JTextArea();
+		tObse.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tDescri.requestFocus();
+
+				}
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					bGuardar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bGuardar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tObse.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Observación, campo obligatorio");
+						tObse.requestFocus();
+
+					} else {
+						bGuardar.setEnabled(true);
+						bGuardar.requestFocus();
+					}
+
+				}
+			
+			}
+		});
 		tObse.setEditable(false);
 		tObse.setLineWrap(true);
 		scrollPane_2.setViewportView(tObse);
