@@ -138,6 +138,7 @@ public class AbmEditor extends JFrame {
 		scrollPane.setViewportView(table);
 
 		bSalir = new JButton("SALIR");
+		bSalir.setBackground(Color.GRAY);
 		bSalir.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bSalir.setHorizontalTextPosition(SwingConstants.CENTER);
 		bSalir.setIcon(new ImageIcon(AbmEditor.class
@@ -175,6 +176,7 @@ public class AbmEditor extends JFrame {
 		contentPane.add(lblObservacin);
 
 		bNuevo = new JButton("Nuevo");
+		bNuevo.setBackground(Color.GRAY);
 		bNuevo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -234,6 +236,7 @@ public class AbmEditor extends JFrame {
 		contentPane.add(bNuevo);
 
 		bModificar = new JButton("Modificar");
+		bModificar.setBackground(Color.GRAY);
 		bModificar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -294,6 +297,7 @@ public class AbmEditor extends JFrame {
 		contentPane.add(bModificar);
 
 		bEliminar = new JButton("Eliminar");
+		bEliminar.setBackground(Color.GRAY);
 		bEliminar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -373,7 +377,7 @@ public class AbmEditor extends JFrame {
 		contentPane.add(bEliminar);
 
 		JLabel lblBuscar = new JLabel("Buscar");
-		lblBuscar.setForeground(Color.WHITE);
+		lblBuscar.setForeground(Color.BLACK);
 		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblBuscar.setBounds(22, 384, 378, 23);
 		contentPane.add(lblBuscar);
@@ -395,6 +399,7 @@ public class AbmEditor extends JFrame {
 		tBusqueda.setColumns(10);
 
 		bCancelar = new JButton("Cancelar");
+		bCancelar.setBackground(Color.GRAY);
 		bCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bCancelar.setIcon(new ImageIcon(AbmEditor.class
@@ -435,6 +440,7 @@ public class AbmEditor extends JFrame {
 		contentPane.add(bCancelar);
 
 		bGuardar = new JButton("Guardar");
+		bGuardar.setBackground(Color.GRAY);
 		bGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bGuardar.setIcon(new ImageIcon(AbmEditor.class
@@ -485,7 +491,7 @@ public class AbmEditor extends JFrame {
 							}
 					}
 					
-					if (bNuevo.getLabel().equals("Agregar")) {
+					if (bNuevo.getLabel().equals("Agregar") && bGuardar.getLabel().equals("Guardar")) {
 						try {
 							SessionEditor.insertar(editor);
 							JOptionPane.showMessageDialog(null,"Editorial creado. Codigo = " + editor.getEdiNumero());

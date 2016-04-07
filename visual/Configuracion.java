@@ -1,21 +1,23 @@
 package visual;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import entidad.Config;
-import session.SessionConfiguracion;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+
+import session.SessionConfiguracion;
+import entidad.Config;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Configuracion extends JFrame {
 
@@ -56,7 +58,7 @@ public class Configuracion extends JFrame {
      * Create the frame.
      */
     public Configuracion() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 550, 350);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,46 +66,54 @@ public class Configuracion extends JFrame {
         contentPane.setLayout(null);
         
         lblOrganizacion = new JLabel("Organizacion");
-        lblOrganizacion.setBounds(51, 25, 101, 15);
+        lblOrganizacion.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblOrganizacion.setBounds(40, 27, 117, 15);
         contentPane.add(lblOrganizacion);
         
         txtOrga = new JTextField();
-        txtOrga.setBounds(291, 25, 114, 19);
+        txtOrga.setBounds(224, 25, 300, 19);
         contentPane.add(txtOrga);
         txtOrga.setColumns(10);
 
         lblDeumor = new JLabel("Monto por mora");
-        lblDeumor.setBounds(51, 75, 127, 15);
+        lblDeumor.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblDeumor.setBounds(40, 77, 129, 15);
         contentPane.add(lblDeumor);
         
         txtDeumor = new JTextField();
-        txtDeumor.setBounds(291, 75, 114, 19);
+        txtDeumor.setBounds(224, 75, 300, 19);
         txtDeumor.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDeumor);
         txtDeumor.setColumns(10);
         
         lblDiamor = new JLabel("Dias para considerar moroso");
-        lblDiamor.setBounds(27, 130, 246, 15);
+        lblDiamor.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblDiamor.setBounds(40, 134, 185, 15);
         contentPane.add(lblDiamor);
         
         txtDiamor = new JTextField();
-        txtDiamor.setBounds(291, 132, 114, 19);
+        txtDiamor.setBounds(224, 132, 300, 19);
 
         txtDiamor.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDiamor);
         txtDiamor.setColumns(10);
         
         lblDiapre = new JLabel("Cantidad de dias a prestar");
-        lblDiapre.setBounds(51, 199, 198, 15);
+        lblDiapre.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblDiapre.setBounds(40, 201, 174, 15);
         contentPane.add(lblDiapre);
         
         txtDiapre = new JTextField();
-        txtDiapre.setBounds(291, 199, 114, 19);
+        txtDiapre.setBounds(224, 199, 300, 19);
         txtDiapre.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDiapre);
         txtDiapre.setColumns(10);
         
         btnGuardar = new JButton("Guardar");
+        btnGuardar.setForeground(Color.GRAY);
+        btnGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnGuardar.setIcon(new ImageIcon(Configuracion.class.getResource("/imagen/glyphicons-194-ok-sign.png")));
         btnGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (txtDeumor.getText().trim().isEmpty() ||
@@ -145,19 +155,25 @@ public class Configuracion extends JFrame {
                     }
                     // Cerrar la ventana de configuracion despues de guardar los datos
                     dispose();
+                  
                 }
             }
         });
-        btnGuardar.setBounds(132, 262, 117, 25);
+        btnGuardar.setBounds(198, 254, 117, 46);
         contentPane.add(btnGuardar);
         
         btnCancelar = new JButton("Cancelar");
+        btnCancelar.setForeground(Color.GRAY);
+        btnCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnCancelar.setIcon(new ImageIcon(Configuracion.class.getResource("/imagen/glyphicons-193-remove-sign.png")));
+        btnCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                
             }
         });
-        btnCancelar.setBounds(291, 262, 117, 25);
+        btnCancelar.setBounds(357, 254, 117, 46);
         contentPane.add(btnCancelar);
         
         // Al abrir la ventana, colocar los valores de

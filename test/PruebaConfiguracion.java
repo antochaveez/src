@@ -1,9 +1,7 @@
 package test;
 
-import java.util.List;
-
+import session.SessionConfiguracion;
 import entidad.Config;
-import session.SessionConfiguracion;;
 
 public class PruebaConfiguracion {
 

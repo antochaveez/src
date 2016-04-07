@@ -63,6 +63,12 @@ private static final long serialVersionUID = 1L;
 			return ediDescri.trim();
 		}
 		
+		public String toString2() {
+			return ediNumero + "";
+		}
+		
+	
+		
 		
 }
 

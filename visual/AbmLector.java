@@ -193,7 +193,7 @@ public class AbmLector extends JFrame {
 
 
 				bEliminar.setEnabled(false);
-				//bNuevo.setLabel("Agregar");
+				bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bGuardar.setLabel("Actualizar");
@@ -279,17 +279,15 @@ public class AbmLector extends JFrame {
 
 					int resp = JOptionPane.showConfirmDialog(
 							bEliminar,
-							"Desea eliminar la editorial? " + "Codigo: "
-									+ lector.getLecCodigo() + " "
-									+ lector.getLecNombre(), "Confirmacion",
+							"Desea eliminar lector? " + "Codigo: "
+									+ lector.getLecCodigo(), "Confirmacion",
 							JOptionPane.OK_CANCEL_OPTION );
 						
 					if (resp == 0) {
 						try {
 							SessionLector.eliminar(lector);
 							JOptionPane.showMessageDialog(null,
-									"Lector ha sido eliminado satisfactoriamente "
-											+ lector.getLecNombre());
+									"Lector ha sido eliminado satisfactoriamente ");
 
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -340,6 +338,7 @@ public class AbmLector extends JFrame {
 		tCodigo.setColumns(10);
 
 		tCedula = new JTextField();
+		tCedula.addKeyListener(new InputDeNumeros());
 		tCedula.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -577,7 +576,7 @@ public class AbmLector extends JFrame {
 							}
 					}
 					
-					if (bNuevo.getLabel().equals("Agregar")) {
+					if (bNuevo.getLabel().equals("Agregar") && bGuardar.getLabel().equals("Guardar")) {
 						try {
 							SessionLector.insertar(lector);
 							JOptionPane.showMessageDialog(null,"Lector creado. Codigo = " + lector.getLecCodigo());

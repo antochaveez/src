@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import entidad.Editor;
 import entidad.Libro;
 
 public class LibroTableModel extends AbstractTableModel {
@@ -23,7 +22,7 @@ public class LibroTableModel extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		
-		return 6;
+		return 7;
 	}
 
 	@Override
@@ -53,6 +52,9 @@ public class LibroTableModel extends AbstractTableModel {
 		}
 		if (columnIndex == 5) {
 			return "Observación";
+		}
+		if (columnIndex == 6) {
+			return "Cod.Editorial";
 		}
 
 		return "";
@@ -85,6 +87,10 @@ public class LibroTableModel extends AbstractTableModel {
 				return lib.getLibObse().trim();
 			}
 			
+			if (columna == 6) {
+				return lib.getEditor().getEdiNumero();
+				
+			}
 			
 			return lib;
 			

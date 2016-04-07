@@ -1,10 +1,14 @@
 package visual;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,27 +16,15 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.Window.Type;
-import java.awt.Rectangle;
-import javax.swing.border.EtchedBorder;
-import java.awt.Color;
-import java.awt.Cursor;
-import javax.swing.UIManager;
-import javax.swing.border.SoftBevelBorder;
-
-import entidad.Config;
-
-import javax.swing.border.BevelBorder;
-import javax.swing.JTextArea;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class MenuPrincipal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Fondito contentPane;
 
 	/**
@@ -69,7 +61,7 @@ public class MenuPrincipal extends JFrame {
 	 */
 	public MenuPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagen/libros1.png")));
-		setTitle("BIBLIOTECA    V 1.3");
+		setTitle("BIBLIOTECA    V. 1.5");
 		setType(Type.POPUP);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 768);
@@ -181,7 +173,7 @@ public class MenuPrincipal extends JFrame {
 		mntmConfiguraciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 				Configuracion config = new Configuracion();
-				config.setSize(450, 350);
+				config.setSize(550, 350);
 				config.setResizable(false);
 				config.setLocationRelativeTo(null);
 				config.setVisible(true);

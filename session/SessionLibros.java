@@ -43,7 +43,7 @@ public class SessionLibros {
 			libro = em.merge(libro);
 			em.getTransaction().commit();
 		} catch (Exception ex) {
-			throw new Exception(ex);
+			//throw new Exception(ex);
 		} finally {
 			if (em != null) {
 				em.close();

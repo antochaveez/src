@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,10 +24,12 @@ public class Prestamo implements Serializable {
 		private Integer preNumero;
 		@Column(name = "pre_fecpre")
 		private Date fecPre;
-		@Column(name = "pre_codlec", unique = true, nullable = false)
-		private Integer preCodLec;
-		@Column(name = "pre_codlib", unique = true, nullable = false)
-		private Integer preCodLib;
+		@ManyToOne
+		@JoinColumn(name = "pre_codlec", unique = true, nullable = false)
+		private Lector lector;
+		@ManyToOne
+		@JoinColumn(name = "pre_codlib", unique = true, nullable = false)
+		private Libro libro;
 		@Column(name = "pre_nroeje", unique = true, nullable = false)
 		private Integer preNroEje;
 		@Column(name = "pre_fecdev")
@@ -54,21 +58,6 @@ public class Prestamo implements Serializable {
 			this.fecPre = fecPre;
 		}
 
-		public Integer getPreCodLec() {
-			return preCodLec;
-		}
-
-		public void setPreCodLec(Integer preCodLec) {
-			this.preCodLec = preCodLec;
-		}
-
-		public Integer getPreCodLib() {
-			return preCodLib;
-		}
-
-		public void setPreCodLib(Integer preCodLib) {
-			this.preCodLib = preCodLib;
-		}
 
 		public Integer getPreNroEje() {
 			return preNroEje;
@@ -97,9 +86,25 @@ public class Prestamo implements Serializable {
 		@Override
 		public String toString() {
 			return "Prestamo [preNumero=" + preNumero + ", fecPre=" + fecPre
-					+ ", preCodLec=" + preCodLec + ", preCodLib=" + preCodLib
-					+ ", preNroEje=" + preNroEje + ", preFecDev=" + preFecDev
+					+ ", preCodLec="+ ", preCodLib="  + ", preNroEje=" + preNroEje 
+					+ ", preFecDev=" + preFecDev
 					+ ", preFecRec=" + preFecRec + "]";
+		}
+
+		public Lector getLector() {
+			return lector;
+		}
+
+		public void setLector(Lector lector) {
+			this.lector = lector;
+		}
+
+		public Libro getLibro() {
+			return libro;
+		}
+
+		public void setLibro(Libro libro) {
+			this.libro = libro;
 		}
 		
 		
