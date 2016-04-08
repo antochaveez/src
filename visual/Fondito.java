@@ -17,7 +17,7 @@ public class Fondito extends JPanel {
 	
 	public Fondito(String nombre) {
 		
-		imagen = new ImageIcon(getClass().getResource(nombre));
+		imagen = new ImageIcon(nombre);
 		setSize(imagen.getIconWidth(),imagen.getIconHeight() );
 
 	}
