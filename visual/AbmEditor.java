@@ -76,7 +76,7 @@ public class AbmEditor extends JFrame {
 		setTitle("Registrar Editorial");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				AbmEditor.class.getResource("/imagen/libros1.png")));
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 452);
 		contentPane = new Fondito("/imagen/fondo3.png");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -585,7 +585,7 @@ public class AbmEditor extends JFrame {
 
 					if (tDescri.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Ingrese Descripción, campo obligatorio");
+								"Ingrese Descripciï¿½n, campo obligatorio");
 						tDescri.requestFocus();
 
 					} else {
@@ -627,7 +627,7 @@ public class AbmEditor extends JFrame {
 
 					if (tObse.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Ingrese Observación, campo obligatorio");
+								"Ingrese Observaciï¿½n, campo obligatorio");
 						tObse.requestFocus();
 
 					} else {

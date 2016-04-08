@@ -81,7 +81,7 @@ public class AbmLector extends JFrame {
 		setTitle("Registrar Lector");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				AbmEditor.class.getResource("/imagen/libros1.png")));
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 500);
 		contentPane = new Fondito("/imagen/fondo3.png");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -456,7 +456,7 @@ public class AbmLector extends JFrame {
 
 					if (tDireccion.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Ingrese Dirección, campo obligatorio");
+								"Ingrese Direcciï¿½n, campo obligatorio");
 						tDireccion.requestFocus();
 
 					} else {
@@ -500,7 +500,7 @@ public class AbmLector extends JFrame {
 
 					if (tTelefo.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Ingrese Teléfono, campo obligatorio");
+								"Ingrese Telï¿½fono, campo obligatorio");
 						tTelefo.requestFocus();
 
 					} else {

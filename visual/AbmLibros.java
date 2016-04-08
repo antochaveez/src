@@ -88,7 +88,7 @@ public class AbmLibros extends JFrame {
 	public AbmLibros() {
 		setTitle("Registrar Libros");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AbmLibros.class.getResource("/imagen/libros1.png")));
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 560);
 		//contentPane = new JPanel();
 		contentPane = new Fondito("/imagen/fondo3.png");
