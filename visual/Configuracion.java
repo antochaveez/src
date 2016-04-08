@@ -1,6 +1,5 @@
 package visual;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -32,6 +31,8 @@ public class Configuracion extends JFrame {
     private JTextField txtDiamor;
     private JLabel lblDiapre;
     private JTextField txtDiapre;
+    private JLabel lblPass;
+    private JTextField txtPass;
     private JButton btnGuardar;
     private JButton btnCancelar;
 
@@ -56,8 +57,8 @@ public class Configuracion extends JFrame {
      * Create the frame.
      */
     public Configuracion() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 550, 350);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 550, 450);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -83,25 +84,35 @@ public class Configuracion extends JFrame {
         txtDeumor.setColumns(10);
         
         lblDiamor = new JLabel("Dias para considerar moroso");
-        lblDiamor.setBounds(27, 130, 246, 15);
+        lblDiamor.setBounds(27, 125, 246, 15);
         contentPane.add(lblDiamor);
         
         txtDiamor = new JTextField();
-        txtDiamor.setBounds(291, 132, 114, 19);
-
+        txtDiamor.setBounds(291, 125, 114, 19);
         txtDiamor.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDiamor);
         txtDiamor.setColumns(10);
         
         lblDiapre = new JLabel("Cantidad de dias a prestar");
-        lblDiapre.setBounds(51, 199, 198, 15);
+        lblDiapre.setBounds(51, 175, 198, 15);
         contentPane.add(lblDiapre);
         
         txtDiapre = new JTextField();
-        txtDiapre.setBounds(291, 199, 114, 19);
+        txtDiapre.setBounds(291, 175, 114, 19);
         txtDiapre.addKeyListener(new InputDeNumeros());
         contentPane.add(txtDiapre);
         txtDiapre.setColumns(10);
+        
+        lblPass = new JLabel("ContraseÃ±a");
+        lblPass.setBounds(51, 225, 114, 19);
+        contentPane.add(lblPass);
+        
+        txtPass = new JTextField();
+        txtPass.setBounds(291, 225, 114, 19);
+        contentPane.add(txtPass);
+        txtPass.setColumns(10);
+        
+        
         
         btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(new ActionListener() {
@@ -109,8 +120,10 @@ public class Configuracion extends JFrame {
                 if (txtDeumor.getText().trim().isEmpty() ||
                     txtDiamor.getText().trim().isEmpty() ||
                     txtDiapre.getText().trim().isEmpty() ||
-                    txtOrga.getText().trim().isEmpty() ){
-                   JOptionPane.showMessageDialog(null, "Existen campos vacíos, complete antes de guardar"); 
+                    txtOrga.getText().trim().isEmpty()   ||
+                    txtPass.getText().trim().isEmpty()){
+                    
+                   JOptionPane.showMessageDialog(null, "Existen campos vacï¿½os, complete antes de guardar"); 
                    if (txtOrga.getText().trim().isEmpty()){
                        txtOrga.requestFocus();
                    } else {
@@ -125,9 +138,12 @@ public class Configuracion extends JFrame {
 
                                if (txtDiapre.getText().trim().isEmpty()){
                                    txtDiapre.requestFocus();
-                               } 
+                               } else {
+                                   if (txtPass.getText().trim().isEmpty()){
+                                       txtPass.requestFocus();
+                                   }
+                               }
                            }
-
                        }
                    }
 
@@ -137,6 +153,7 @@ public class Configuracion extends JFrame {
                     config.setCfgDeumor(Integer.parseInt( txtDeumor.getText() ));
                     config.setCfgDiamor(Integer.parseInt( txtDiamor.getText() ));
                     config.setCfgDiapre(Integer.parseInt( txtDiapre.getText() ));
+                    config.setCfgPass(txtPass.getText());
                     try {
                         SessionConfiguracion.cambiarConfiguracion(config);
                     } catch (Exception e1) {
@@ -148,7 +165,7 @@ public class Configuracion extends JFrame {
                 }
             }
         });
-        btnGuardar.setBounds(132, 262, 117, 25);
+        btnGuardar.setBounds(132, 275, 117, 25);
         contentPane.add(btnGuardar);
         
         btnCancelar = new JButton("Cancelar");
@@ -157,19 +174,37 @@ public class Configuracion extends JFrame {
                 dispose();
             }
         });
-        btnCancelar.setBounds(291, 262, 117, 25);
+        btnCancelar.setBounds(291, 275, 117, 25);
         contentPane.add(btnCancelar);
         
         // Al abrir la ventana, colocar los valores de
         //la configuracion en los textbox
         if (SessionConfiguracion.existeConfiguracion()){
             Config config = SessionConfiguracion.obtenerConfiguracion();
-            txtOrga.setText(config.getCfgOrga());
-            txtDeumor.setText(config.getCfgDeumor().toString());
-            txtDiamor.setText(config.getCfgDiamor().toString());
-            txtDiapre.setText(config.getCfgDiapre().toString());
+
+            if (config.getCfgOrga() != null){
+                txtOrga.setText(config.getCfgOrga());
+            }
+            
+            if (config.getCfgDeumor() != null){
+                txtDeumor.setText(config.getCfgDeumor().toString());
+            }
+
+            if (config.getCfgDiamor() != null){
+                txtDiamor.setText(config.getCfgDiamor().toString());
+            }
+
+            if (config.getCfgDiapre() != null){
+                txtDiapre.setText(config.getCfgDiapre().toString());
+            }
+
+            if (config.getCfgPass() != null){
+                txtPass.setText(config.getCfgPass().toString());
+            }
+
+
         }
         
     }   
         
-    }
+}

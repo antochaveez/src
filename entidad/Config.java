@@ -26,6 +26,8 @@ private static final long serialVersionUID = 1L;
 		private Integer cfgDiamor;
 		@Column(name = "cfg_diapre")
 		private Integer cfgDiapre;
+	    @Column(name = "cfg_pass")
+	    private String cfgPass;
 		
 		public Config() {
 			super();
@@ -34,16 +36,37 @@ private static final long serialVersionUID = 1L;
 		
 		
 		public Config(String cfgOrga, Integer cfgDeumor, Integer cfgDiamor,
-				Integer cfgDiapre) {
+				Integer cfgDiapre, String cfgPass) {
 			super();
 			this.cfgOrga = cfgOrga;
 			this.cfgDeumor = cfgDeumor;
 			this.cfgDiamor = cfgDiamor;
 			this.cfgDiapre = cfgDiapre;
+			this.cfgPass = cfgPass;
 		}
 
 
-		public String getCfgOrga() {
+		public Config(String cfgOrga, Integer cfgDeumor, Integer cfgDiamor,
+                            Integer cfgDiapre) {
+            this.cfgOrga = cfgOrga;
+            this.cfgDeumor = cfgDeumor;
+            this.cfgDiamor = cfgDiamor;
+            this.cfgDiapre = cfgDiapre;
+
+        }
+
+
+        public String getCfgPass() {
+            return cfgPass;
+        }
+
+
+        public void setCfgPass(String cfgPass) {
+            this.cfgPass = cfgPass;
+        }
+
+
+        public String getCfgOrga() {
 			return cfgOrga;
 		}
 
@@ -75,15 +98,15 @@ private static final long serialVersionUID = 1L;
 			this.cfgDiapre = cfgDiapre;
 		}
 
+
 		@Override
-		public String toString() {
-			return "Config [cfgOrga=" + cfgOrga + ", cfgDeumor=" + cfgDeumor
-					+ ", cfgDiamor=" + cfgDiamor + ", cfgDiapre=" + cfgDiapre
-					+ "]";
-		}
+        public String toString() {
+            return "Config [cfgCodigo=" + cfgCodigo + ", cfgOrga=" + cfgOrga + ", cfgDeumor=" + cfgDeumor
+                    + ", cfgDiamor=" + cfgDiamor + ", cfgDiapre=" + cfgDiapre + ", cfgPass=" + cfgPass + "]";
+        }
 
 
-		public Integer getCfgCodigo() {
+        public Integer getCfgCodigo() {
 			return cfgCodigo;
 		}
 

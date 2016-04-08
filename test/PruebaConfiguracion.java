@@ -1,9 +1,8 @@
 package test;
 
-import java.util.List;
-
 import entidad.Config;
-import session.SessionConfiguracion;;
+import session.SessionInicializacion;
+import session.SessionConfiguracion;
 
 public class PruebaConfiguracion {
 
@@ -11,13 +10,15 @@ public class PruebaConfiguracion {
         
         //pruebaInsertar();
         //pruebaModificar();
-        pruebaObtener();
-        pruebaCambiarConfiguracion();
-        pruebaObtener();
-        
+        //pruebaObtener();
+        //pruebaCambiarConfiguracion();
+        //pruebaObtener();
+        //pruebaTruncadoParcial();
+        pruebaTruncadoTotal();
     }
     
-    public static void pruebaInsertar() throws Exception {
+    @SuppressWarnings("unused")
+    private static void pruebaInsertar() throws Exception {
         Config config = new Config();
         
         config.setCfgDeumor(500);
@@ -31,7 +32,8 @@ public class PruebaConfiguracion {
     }
     
         
-    public static void pruebaModificar() throws Exception {
+    @SuppressWarnings("unused")
+    private static void pruebaModificar() throws Exception {
         
         Config config = new Config("UNE", 6000, 5, 9);
          
@@ -39,7 +41,8 @@ public class PruebaConfiguracion {
         SessionConfiguracion.editar(config);
     }
     
-    public static void pruebaObtener() throws Exception {
+    @SuppressWarnings("unused")
+    private static void pruebaObtener() throws Exception {
         
         // Si existe la confifuracion
         if (SessionConfiguracion.existeConfiguracion()){
@@ -52,7 +55,8 @@ public class PruebaConfiguracion {
         
     }
     
-    public static void pruebaCambiarConfiguracion() throws Exception{
+    @SuppressWarnings("unused")
+    private static void pruebaCambiarConfiguracion() throws Exception{
         Config config = new Config();
         config.setCfgOrga("Poli");
         config.setCfgDeumor(5);
@@ -61,4 +65,14 @@ public class PruebaConfiguracion {
         SessionConfiguracion.cambiarConfiguracion(config);
     }
 
+    @SuppressWarnings("unused")
+    private static void pruebaTruncadoParcial() throws Exception{
+        SessionInicializacion.truncadoParcial();
+    }
+    
+    private static void pruebaTruncadoTotal() throws Exception{
+        SessionInicializacion.truncadoTotal();
+    }
+
+    
 }
