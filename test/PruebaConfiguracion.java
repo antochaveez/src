@@ -1,5 +1,7 @@
 package test;
 
+import java.util.List;
+
 import entidad.Config;
 import session.SessionInicializacion;
 import session.SessionConfiguracion;

@@ -193,7 +193,7 @@ public class AbmLector extends JFrame {
 
 
 				bEliminar.setEnabled(false);
-				//bNuevo.setLabel("Agregar");
+				bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bGuardar.setLabel("Actualizar");
@@ -279,17 +279,15 @@ public class AbmLector extends JFrame {
 
 					int resp = JOptionPane.showConfirmDialog(
 							bEliminar,
-							"Desea eliminar la editorial? " + "Codigo: "
-									+ lector.getLecCodigo() + " "
-									+ lector.getLecNombre(), "Confirmacion",
+							"Desea eliminar lector? " + "Codigo: "
+									+ lector.getLecCodigo(), "Confirmacion",
 							JOptionPane.OK_CANCEL_OPTION );
 						
 					if (resp == 0) {
 						try {
 							SessionLector.eliminar(lector);
 							JOptionPane.showMessageDialog(null,
-									"Lector ha sido eliminado satisfactoriamente "
-											+ lector.getLecNombre());
+									"Lector ha sido eliminado satisfactoriamente ");
 
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -340,6 +338,7 @@ public class AbmLector extends JFrame {
 		tCodigo.setColumns(10);
 
 		tCedula = new JTextField();
+		tCedula.addKeyListener(new InputDeNumeros());
 		tCedula.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -577,7 +576,7 @@ public class AbmLector extends JFrame {
 							}
 					}
 					
-					if (bNuevo.getLabel().equals("Agregar")) {
+					if (bNuevo.getLabel().equals("Agregar") && bGuardar.getLabel().equals("Guardar")) {
 						try {
 							SessionLector.insertar(lector);
 							JOptionPane.showMessageDialog(null,"Lector creado. Codigo = " + lector.getLecCodigo());
@@ -596,7 +595,7 @@ public class AbmLector extends JFrame {
 			
 			}
 		});
-		bGuardar.setBounds(649, 351, 91, 43);
+		bGuardar.setBounds(649, 351, 91, 46);
 		bGuardar.setBackground(Color.LIGHT_GRAY);
 		bGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -646,7 +645,7 @@ public class AbmLector extends JFrame {
 			
 			}
 		});
-		bCancelar.setBounds(771, 351, 91, 43);
+		bCancelar.setBounds(771, 351, 91, 46);
 		bCancelar.setBackground(Color.LIGHT_GRAY);
 		bCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -655,7 +654,7 @@ public class AbmLector extends JFrame {
 
 		bSalir = new JButton("SALIR");
 		bSalir.setIcon(new ImageIcon(AbmLector.class.getResource("/imagen/glyphicons-389-exit.png")));
-		bSalir.setBounds(771, 405, 91, 43);
+		bSalir.setBounds(771, 405, 91, 46);
 		bSalir.setBackground(Color.LIGHT_GRAY);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

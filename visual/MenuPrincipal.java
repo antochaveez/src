@@ -1,10 +1,14 @@
 package visual;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,6 +37,10 @@ import java.awt.event.KeyEvent;
 
 public class MenuPrincipal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Fondito contentPane;
 
 	/**
@@ -69,7 +77,7 @@ public class MenuPrincipal extends JFrame {
 	 */
 	public MenuPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagen/libros1.png")));
-		setTitle("BIBLIOTECA    V 1.3");
+		setTitle("BIBLIOTECA    V 1.5");
 		setType(Type.NORMAL);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 768);
@@ -93,7 +101,23 @@ public class MenuPrincipal extends JFrame {
 		mnTablas.setMnemonic('T');
 		menuBar.add(mnTablas);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Libros");
+		final JMenuItem mntmNewMenuItem = new JMenuItem("Libros");
+		mntmNewMenuItem.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				mntmNewMenuItem.doClick();
+			}
+		});
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				AbmLibros abmLibro = new AbmLibros();
+				abmLibro.setSize(900, 560);
+				abmLibro.setResizable(false);
+				abmLibro.setLocationRelativeTo(null);
+				abmLibro.setVisible(true);
+			}
+		});
 		mntmNewMenuItem.setMnemonic('L');
 		mnTablas.add(mntmNewMenuItem);
 		
@@ -176,7 +200,7 @@ public class MenuPrincipal extends JFrame {
 		mntmConfiguraciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 				Configuracion config = new Configuracion();
-				config.setSize(450, 350);
+				config.setSize(550, 350);
 				config.setResizable(false);
 				config.setLocationRelativeTo(null);
 				config.setVisible(true);
@@ -195,7 +219,25 @@ public class MenuPrincipal extends JFrame {
 		bPrestamo.setBounds(0, 25, 125, 71);
 		contentPane.add(bPrestamo);
 		
-		JButton bLibros = new JButton("Libros");
+		final JButton bLibros = new JButton("Libros");
+		bLibros.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					bLibros.doClick();
+				}
+				
+			}
+		});
+		bLibros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AbmLibros abmLibro = new AbmLibros();
+				abmLibro.setSize(900, 560);
+				abmLibro.setResizable(false);
+				abmLibro.setLocationRelativeTo(null);
+				abmLibro.setVisible(true);
+			}
+		});
 		bLibros.setBackground(Color.GRAY);
 		bLibros.setForeground(Color.BLACK);
 		bLibros.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -204,7 +246,24 @@ public class MenuPrincipal extends JFrame {
 		bLibros.setBounds(0, 94, 125, 71);
 		contentPane.add(bLibros);
 		
-		JButton bLector = new JButton("Lector");
+		final JButton bLector = new JButton("Lector");
+		bLector.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					bLector.doClick();
+				}
+			}
+		});
+		bLector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AbmLector abmLector = new AbmLector();
+				abmLector.setSize(900, 500);
+				abmLector.setResizable(false);
+				abmLector.setLocationRelativeTo(null);
+				abmLector.setVisible(true);
+			}
+		});
 		bLector.setBackground(Color.GRAY);
 		bLector.setForeground(Color.BLACK);
 		bLector.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -218,7 +277,7 @@ public class MenuPrincipal extends JFrame {
 		bSalir.setForeground(Color.BLACK);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				System.exit(0);
 			}
 		});
 		bSalir.setHorizontalTextPosition(SwingConstants.CENTER);

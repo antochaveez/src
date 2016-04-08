@@ -58,11 +58,12 @@ public class AbmLibros extends JFrame {
 	private JTextField tBusqueda;
 	private JTextArea tObse;
 	private JTextArea tDescri;
-	private JTextArea tAutor;
+	public static JTextArea tAutor;
 	private JTextArea tIsbn;
 	public static int auxCodEditorial;
+	public static int auxCodEditorial2;
 	private JButton bBusqueda;
-	
+	private String descri;
 	
 
 	/**
@@ -101,6 +102,22 @@ public class AbmLibros extends JFrame {
 		
 		
 		bNuevo = new JButton("Nuevo");
+		bNuevo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bModificar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					bModificar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bNuevo.doClick();
+				}
+			}
+		});
+		bNuevo.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-146-folder-plus.png")));
+		bNuevo.setForeground(Color.BLACK);
 		bNuevo.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -125,13 +142,16 @@ public class AbmLibros extends JFrame {
 				tIsbn.setText("");
 				tObse.setText("");
 
+				
 				tCodigo.setEditable(false);
 				tDescri.setEditable(true);
 				tDescri.requestFocus();
-				tEditorial.setEditable(true);
+				tEditorial.setEditable(false);
 				tAutor.setEditable(true);
 				tIsbn.setEditable(true);
 				tObse.setEditable(true);
+				bBusqueda.setEnabled(true);
+				
 								
 
 				bModificar.setEnabled(false);
@@ -159,13 +179,31 @@ public class AbmLibros extends JFrame {
 		contentPane.add(bNuevo);
 		
 		bModificar = new JButton("Modificar");
+		bModificar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bNuevo.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bEliminar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bModificar.doClick();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					bEliminar.requestFocus();
+				}
+			}
+		});
+		bModificar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-149-folder-flag.png")));
+		bModificar.setForeground(Color.BLACK);
 		bModificar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 
-
-
 				bEliminar.setEnabled(false);
+				bNuevo.setLabel("Agregar");
 				bNuevo.setEnabled(false);
 				bModificar.setEnabled(false);
 				bGuardar.setLabel("Actualizar");
@@ -182,7 +220,8 @@ public class AbmLibros extends JFrame {
 
 					tCodigo.setEditable(false);
 					tDescri.setEditable(true);
-					tEditorial.setEditable(true);
+					tEditorial.setEditable(false);
+					bBusqueda.setEnabled(true);
 					tAutor.setEditable(true);
 					tIsbn.setEditable(true);
 					tObse.setEditable(true);
@@ -205,6 +244,25 @@ public class AbmLibros extends JFrame {
 		contentPane.add(bModificar);
 		
 		bEliminar = new JButton("Eliminar");
+		bEliminar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bModificar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tBusqueda.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					bEliminar.doClick();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					tBusqueda.requestFocus();
+				}
+			}
+		});
+		bEliminar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-147-folder-minus.png")));
+		bEliminar.setForeground(Color.BLACK);
 		bEliminar.setBackground(Color.GRAY);
 		bEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -228,20 +286,20 @@ public class AbmLibros extends JFrame {
 					Libro libro = new Libro();
 
 					libro.setLibCodigo(Integer.valueOf(tCodigo.getText()));
-
+					
+					descri = modelo.getLibList().get(table.getSelectedRow()).getLibDescri();
+					JOptionPane.showMessageDialog(null, descri);
 					int resp = JOptionPane.showConfirmDialog(
 							bEliminar,
 							"Desea eliminar el libro? " + "Codigo: "
-									+ libro.getLibCodigo() + " "
-									+ libro.getLibDescri(), "Confirmacion",
+									+ libro.getLibCodigo()+ " " + descri, "Confirmacion",
 							JOptionPane.OK_CANCEL_OPTION );
 						
 					if (resp == 0) {
 						try {
 							SessionLibros.eliminar(libro);
 							JOptionPane.showMessageDialog(null,
-									"Libro eliminado satisfactoriamente "
-											+ libro.getLibDescri());
+									"Libro eliminado satisfactoriamente ");
 
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -265,6 +323,32 @@ public class AbmLibros extends JFrame {
 		contentPane.add(bEliminar);
 		
 		bCancelar = new JButton("Cancelar");
+		bCancelar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					bGuardar.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tObse.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					bCancelar.doClick();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bSalir.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+
+					bSalir.doClick();
+				}
+			}
+		});
+		bCancelar.setBackground(Color.GRAY);
+		bCancelar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-193-remove-sign.png")));
+		bCancelar.setForeground(Color.BLACK);
 		bCancelar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -288,6 +372,7 @@ public class AbmLibros extends JFrame {
 				
 				tDescri.setEditable(false);
 				tEditorial.setEditable(false);
+				bBusqueda.setEnabled(false);
 				tAutor.setEditable(false);
 				tIsbn.setEditable(false);
 				tObse.setEditable(false);
@@ -310,13 +395,35 @@ public class AbmLibros extends JFrame {
 			
 			}
 		});
-		bCancelar.setBounds(783, 411, 91, 43);
+		bCancelar.setBounds(783, 411, 91, 46);
 		bCancelar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bCancelar.setEnabled(false);
 		contentPane.add(bCancelar);
 		
 		bGuardar = new JButton("Guardar");
+		bGuardar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					bCancelar.requestFocus();
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tObse.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					bGuardar.doClick();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					bCancelar.requestFocus();
+				}
+			}
+		});
+		bGuardar.setBackground(Color.GRAY);
+		bGuardar.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-194-ok-sign.png")));
+		bGuardar.setForeground(Color.BLACK);
 		bGuardar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -356,8 +463,12 @@ public class AbmLibros extends JFrame {
 					
 					Libro libro = new Libro();
 					Editor editor = new Editor();
-					editor.setEdiNumero(auxCodEditorial);
 					
+					if (bGuardar.getLabel().equals("Actualizar")) {
+						editor.setEdiNumero(auxCodEditorial2);
+					}else {
+						editor.setEdiNumero(auxCodEditorial);
+					}
 					
 					libro.setLibDescri(tDescri.getText().trim());
 					
@@ -366,13 +477,10 @@ public class AbmLibros extends JFrame {
 					libro.setLibIsbn(tIsbn.getText().trim());
 					libro.setLibObse(tObse.getText().trim());
 					
-					
-					
-					//JOptionPane.showMessageDialog(null,"" + tDescri.getText().trim());
-					//JOptionPane.showMessageDialog(null,"" + tObse.getText().trim());
+					auxCodEditorial2 = (int) table.getValueAt(fila, 6);
 
 					if (bGuardar.getLabel().equals("Actualizar")) {
-
+						
 						libro.setLibCodigo(Integer.valueOf(tCodigo.getText()));
 
 							try {
@@ -381,6 +489,7 @@ public class AbmLibros extends JFrame {
 								if (libroBuscar != null) {
 									SessionLibros.editar(libro);
 									JOptionPane.showMessageDialog(null,"Libro actualizado");
+			
 								}					
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
@@ -388,8 +497,8 @@ public class AbmLibros extends JFrame {
 							}
 					}
 					
-					if (bNuevo.getLabel().equals("Agregar")) {
-						try {
+					if (bNuevo.getLabel().equals("Agregar") && bGuardar.getLabel().equals("Guardar")) {
+						try { 
 							SessionLibros.insertar(libro);
 							JOptionPane.showMessageDialog(null,"Libro creado. Codigo = " + libro.getLibCodigo());
 						} catch (Exception e) {
@@ -408,14 +517,30 @@ public class AbmLibros extends JFrame {
 			
 			}
 		});
-		bGuardar.setBounds(661, 411, 91, 43);
+		bGuardar.setBounds(661, 411, 91, 46);
 		bGuardar.setVerticalTextPosition(SwingConstants.BOTTOM);
 		bGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
 		bGuardar.setEnabled(false);
 		contentPane.add(bGuardar);
 		
 		bSalir = new JButton("SALIR");
-		bSalir.setBounds(783, 465, 91, 43);
+		bSalir.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bCancelar.requestFocus();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					bSalir.doClick();
+				}
+			}
+		});
+		bSalir.setBackground(Color.GRAY);
+		bSalir.setIcon(new ImageIcon(AbmLibros.class.getResource("/imagen/glyphicons-389-exit.png")));
+		bSalir.setForeground(Color.BLACK);
+		bSalir.setBounds(783, 465, 91, 46);
 		bSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -459,7 +584,7 @@ public class AbmLibros extends JFrame {
 		tCodigo = new JTextField();
 		tCodigo.setEditable(false);
 		tCodigo.setBounds(91, 36, 216, 20);
-		tCodigo.setBorder(null);
+		tCodigo.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(tCodigo);
 		tCodigo.setColumns(10);
 		
@@ -475,7 +600,7 @@ public class AbmLibros extends JFrame {
 			}
 		});
 		tEditorial.setBounds(91, 131, 216, 20);
-		tEditorial.setBorder(null);
+		tEditorial.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(tEditorial);
 		tEditorial.setColumns(10);
 		
@@ -484,11 +609,73 @@ public class AbmLibros extends JFrame {
 		panel.add(scrollPane_1);
 		
 		tDescri = new JTextArea();
+		tDescri.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				if (arg0.getKeyCode() == KeyEvent.VK_TAB) {
+					bBusqueda.requestFocus();
+				}
+
+
+				if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+					bBusqueda.requestFocus();
+
+				}
+
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tDescri.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Descripción, campo obligatorio");
+						tDescri.requestFocus();
+
+					} else {
+						bBusqueda.setEnabled(true);
+						bBusqueda.requestFocus();
+					}
+
+				}
+			}
+		});
 		tDescri.setEditable(false);
 		tDescri.setLineWrap(true);
 		scrollPane_1.setViewportView(tDescri);
 		
 		bBusqueda = new JButton("");
+		bBusqueda.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					tAutor.requestFocus();
+				}
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tDescri.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tAutor.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tEditorial.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Seleccione una Editorial, campo obligatorio");
+						bBusqueda.doClick();
+
+					} else {
+						bBusqueda.doClick();
+					}
+
+				}
+			}
+		});
+		bBusqueda.setEnabled(false);
 		bBusqueda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InterfazTablaEditorial ite = new InterfazTablaEditorial();
@@ -508,6 +695,39 @@ public class AbmLibros extends JFrame {
 		panel.add(scrollPane_2);
 		
 		tAutor = new JTextArea();
+		tAutor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					tIsbn.requestFocus();
+				}
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					bBusqueda.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tIsbn.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tAutor.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Autor, campo obligatorio");
+						tAutor.requestFocus();
+
+					} else {
+						tIsbn.setEnabled(true);
+						tIsbn.requestFocus();
+					}
+
+				}
+			}
+		});
 		tAutor.setEditable(false);
 		tAutor.setLineWrap(true);
 		scrollPane_2.setViewportView(tAutor);
@@ -517,6 +737,39 @@ public class AbmLibros extends JFrame {
 		panel.add(scrollPane_3);
 		
 		tIsbn = new JTextArea();
+		tIsbn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					tObse.requestFocus();
+				}
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tAutor.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					tObse.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tIsbn.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Isbn, campo obligatorio");
+						tIsbn.requestFocus();
+
+					} else {
+						tObse.setEnabled(true);
+						tObse.requestFocus();
+					}
+
+				}
+			}
+		});
 		tIsbn.setEditable(false);
 		tIsbn.setLineWrap(true);
 		scrollPane_3.setViewportView(tIsbn);
@@ -526,6 +779,39 @@ public class AbmLibros extends JFrame {
 		panel.add(scrollPane_4);
 		
 		tObse = new JTextArea();
+		tObse.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_TAB) {
+					bGuardar.requestFocus();
+				}
+
+
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					tIsbn.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					bGuardar.requestFocus();
+
+				}
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					if (tObse.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,
+								"Ingrese Observación, campo obligatorio");
+						tObse.requestFocus();
+
+					} else {
+						bGuardar.setEnabled(true);
+						bGuardar.requestFocus();
+					}
+
+				}
+			}
+		});
 		tObse.setEditable(false);
 		tObse.setLineWrap(true);
 		scrollPane_4.setViewportView(tObse);
@@ -549,6 +835,14 @@ public class AbmLibros extends JFrame {
 		tBusqueda.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_TAB) {
+					bNuevo.requestFocus();
+				}
+			}
+		});
 		scrollPane.setBounds(22, 22, 378, 378);
 		contentPane.add(scrollPane);
 		
@@ -561,7 +855,7 @@ public class AbmLibros extends JFrame {
 				if (bNuevo.getLabel().equals("Nuevo")) {
 					fila = table.rowAtPoint(arg0.getPoint());
 					if (fila > -1) {
-						
+									
 						tCodigo.setText(String.valueOf(table.getValueAt(fila, 0)));
 						tDescri.setText(String.valueOf(table.getValueAt(fila, 1))
 								.trim());
@@ -628,6 +922,7 @@ public class AbmLibros extends JFrame {
 		columModel.getColumn(3).setPreferredWidth(150);
 		columModel.getColumn(4).setPreferredWidth(80);
 		columModel.getColumn(5).setPreferredWidth(150);
+		columModel.getColumn(6).setPreferredWidth(80);
 
 		modelo.setLibList(SessionLibros.obtenerListaLibro());
 		
@@ -653,5 +948,8 @@ public class AbmLibros extends JFrame {
 	}
 	public JButton getBBusqueda() {
 		return bBusqueda;
+	}
+	public JTable getTable() {
+		return table;
 	}
 }

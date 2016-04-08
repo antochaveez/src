@@ -58,6 +58,7 @@ public class InterfazTablaEditorial extends JDialog {
 	 * Create the dialog.
 	 */
 	public InterfazTablaEditorial() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setTitle("Editoriales");
 		setBounds(100, 100, 537, 500);
 		getContentPane().setLayout(new BorderLayout());
@@ -107,7 +108,9 @@ public class InterfazTablaEditorial extends JDialog {
 				bOk = new JButton("OK");
 				bOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						AbmLibros.tAutor.requestFocus();
 						dispose();
+						
 					}
 				});
 				bOk.setActionCommand("OK");
@@ -115,7 +118,7 @@ public class InterfazTablaEditorial extends JDialog {
 				getRootPane().setDefaultButton(bOk);
 			}
 			{
-				bCancel = new JButton("Cancel");
+				bCancel = new JButton("Cancelar");
 				bCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						AbmLibros.tEditorial.setText("");

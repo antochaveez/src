@@ -105,9 +105,7 @@ public class Libro implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Libro [libCodigo=" + libCodigo + ", libDescri=" + libDescri
-					+ ", editor=" + editor + ", libAutor=" + libAutor
-					+ ", libIsbn=" + libIsbn + ", libObse=" + libObse + "]";
+			return libDescri;
 		}
 		
 		

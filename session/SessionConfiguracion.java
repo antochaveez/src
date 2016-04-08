@@ -1,16 +1,12 @@
 package session;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import entidad.Config;
-import entidad.Editor;
 
 
 public class SessionConfiguracion {

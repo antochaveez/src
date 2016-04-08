@@ -89,10 +89,11 @@ public class Lector implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Lector [lecCodigo=" + lecCodigo + ", lecNombre="
-					+ lecNombre + ", lecCedula=" + lecCedula
-					+ ", lecDireccion=" + lecDireccion + ", lecTelefo="
-					+ lecTelefo + "]";
+			return lecNombre;
+					
+		}
+		public String toString2() {
+			return lecCodigo + "";
 		}
 		
 		
