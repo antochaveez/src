@@ -70,7 +70,7 @@ public class MenuPrincipal extends JFrame {
 	public MenuPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagen/libros1.png")));
 		setTitle("BIBLIOTECA    V 1.3");
-		setType(Type.POPUP);
+		setType(Type.NORMAL);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 768);
 		contentPane = new Fondito("/imagen/fondo2.jpg");
@@ -159,6 +159,17 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnUtilidades);
 		
 		JMenuItem mntmInicializacionDeDatos = new JMenuItem("Inicializaci\u00F3n de Datos");
+		mntmInicializacionDeDatos.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Inicializacion ini = new Inicializacion();
+                ini.setSize(450, 350);
+                ini.setResizable(false);
+                ini.setLocationRelativeTo(null);
+                ini.setVisible(true);
+            }
+        });
 		mnUtilidades.add(mntmInicializacionDeDatos);
 		
 		JMenuItem mntmConfiguraciones = new JMenuItem("Configuraciones");
